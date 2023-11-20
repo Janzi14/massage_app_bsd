@@ -32,5 +32,37 @@
       "price_in_euro": 30,
       "body_part": "Nach Absprache"
     }
+  ],
+  "team": [{
+    "id": "team1",
+    "name": "Jakob Janz",
+    "proffesion": "Diplom-Heilmasseur",
+    "motto": "Finding and releasing tension in your body.",
+    "age": 21
+  },
+    {
+      "id": "team2",
+      "name": "Lukas Grafoner",
+      "proffesion": "Diplom-Heilmasseur",
+      "motto": "Finding and releasing tension in your body.",
+      "age": 22
+
+    },
+    {
+      "id": "team3",
+      "name": "Julia Grabner-Haider",
+      "proffesion": "Beratung und Verkauf",
+      "motto": "Finding and releasing tension in your body.",
+      "age": 23
+
+    },
+    {
+      "id": "team4",
+      "name": "Viktoria Feichtinger",
+      "proffesion": "Beratung und Verkauf",
+      "motto": "Finding and releasing tension in your body.",
+      "age": 23
+
+    }
   ]
 }
