@@ -1,4 +1,3 @@
-import { Routes } from '@angular/router';
 import {TreatmentsComponent} from "./views/treatments/treatments.component";
 import {TeamComponent} from "./views/team/team.component";
 
