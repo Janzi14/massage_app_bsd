@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { TreatmentsComponent } from './views/treatments/treatments.component';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
+import { TeamComponent } from './views/team/team.component';
 
 @NgModule({
   imports: [
