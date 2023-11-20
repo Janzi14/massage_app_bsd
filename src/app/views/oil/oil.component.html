@@ -1,1 +1,19 @@
-<p>oil works!</p>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Beschreibung</th>
+    <th>Inhaltsstoffe</th>
+    <th>Flaschengröße</th>
+    <th>Preis</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let oil of oils">
+    <td>{{oil.name}}</td>
+    <td>{{oil.description}}</td>
+    <td>{{oil.ingredients}}</td>
+    <td>{{oil.bottle_size}} ml</td>
+    <td>€{{oil.price}}</td>
+    <td *ngIf="oil.availability; else notAvailable">Auf Lager</td>
+    <ng-template #notAvailable>Ausverkauft</ng-template>
+  </tr>
+</table>

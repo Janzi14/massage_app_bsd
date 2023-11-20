@@ -5,12 +5,13 @@ import { AppComponent } from './app.component';
 import { TreatmentsComponent } from './views/treatments/treatments.component';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { OilComponent } from './views/oil/oil.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     BrowserModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [provideRouter(routes)],
   bootstrap: [AppComponent]
