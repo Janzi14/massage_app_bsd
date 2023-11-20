@@ -6,9 +6,40 @@
   ],
   "oil": [
     {
-      "id": "1",
-      "name": "test",
-      "price": "€ 15,99"
+      "id": 1,
+      "name": "Lavendelöl",
+      "description": "Dieses Massageöl bietet eine entspannende Erfahrung mit dem beruhigenden Duft von Lavendel. Ideal für Stressabbau und Entspannung.",
+      "ingredients": ["Mandelöl", "Lavendelöl", "Vitamin E"],
+      "bottle_size": 150,
+      "price": 12.99,
+      "availability": true
+    },
+    {
+      "id": 2,
+      "name": "Eukalyptusöl",
+      "description": "Ein belebendes Massageöl mit dem erfrischenden Duft von Eukalyptus. Perfekt, um neue Energie zu tanken und die Sinne zu beleben.",
+      "ingredients": ["Jojobaöl", "Eukalyptusöl", "Minzöl", "Vitamin C"],
+      "bottle_size": 130,
+      "price": 17.99,
+      "availability": true
+    },
+    {
+      "id": 3,
+      "name": "Kokosnussöl",
+      "description": "Dieses Massageöl vereint die Exotik der Tropen mit einem verführerischen Hauch von Kokosnuss. Feuchtigkeitsspendend und revitalisierend.",
+      "ingredients": ["Kokosöl", "Arganöl", "Vitamin A", "Vitamin E"],
+      "bottle_size": 250,
+      "price": 15.99,
+      "availability": false
+    },
+    {
+      "id": 4,
+      "name": "Zitrusfrisches Orangenöl",
+      "description": "Erfrischendes Massageöl mit dem belebenden Duft von Orangen. Ideal, um neue Energie zu tanken und die Haut zu revitalisieren.",
+      "ingredients": ["Traubenkernöl", "Orangenöl", "Zitronenöl", "Vitamin C"],
+      "bottle_size": 160,
+      "price": 13.99,
+      "availability": true
     }
   ]
 }
