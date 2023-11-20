@@ -1,7 +1,36 @@
 {
   "treatments": [
     {
-      "id": "seas"
+      "id": "r1",
+      "name": "Reflexzonenmassage",
+      "description": "WödKlasse",
+      "duration_in_min": 30,
+      "price_in_euro": 50,
+      "body_part": "Fußsohle"
+    },
+    {
+      "id": "a2",
+      "name": "Ayurvedamassage",
+      "description": "WödKlasse",
+      "duration_in_min": 60,
+      "price_in_euro": 90,
+      "body_part": "Ganzer Körper"
+    },
+    {
+      "id": "b3",
+      "name": "Basic Massage",
+      "description": "WödKlasse",
+      "duration_in_min": 25,
+      "price_in_euro": 30,
+      "body_part": "Nach Absprache"
+    },
+    {
+      "id": "l4",
+      "name": "Lösch Massage",
+      "description": "WödKlasse",
+      "duration_in_min": 25,
+      "price_in_euro": 30,
+      "body_part": "Nach Absprache"
     }
   ]
 }
