@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { TreatmentsComponent } from './views/treatments/treatments.component';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
+import { OilComponent } from './views/oil/oil.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import { routes } from './app.routes';
     NgbModule
   ],
   providers: [provideRouter(routes)],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
