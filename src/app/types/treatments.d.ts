@@ -1,4 +1,4 @@
-interface MassageTreatment {
+interface Treatment {
   id: string;
   name: string;
   description: string;
