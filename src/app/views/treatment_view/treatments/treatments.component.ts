@@ -36,9 +36,8 @@ export class TreatmentsComponent {
   }
 
   onDelete(id: string) {
-    const index = this.treatments?.findIndex((treatment) => treatment.id === id)
-    if (index) {
-      this.treatmentService.deleteTreatment(id).subscribe({
+    const confirmed = window.confirm("Möchtest du diese Behandlung wirklich löschen");
+    if(confirmed)  this.treatmentService.deleteTreatment(id).subscribe({
         next: data => {
           this.getTreatments();
           alert('Erfolgreich gelöscht');
@@ -48,6 +47,5 @@ export class TreatmentsComponent {
           console.error(error);
         },
       });
-    }
   }
 }
