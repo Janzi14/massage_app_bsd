@@ -5,5 +5,7 @@ interface Oil{
   ingredients: string[],
   bottle_size: number,
   price: number,
-  availability: boolean
+  availability: boolean,
+  origin: string,
+  pictures: string[]
 }

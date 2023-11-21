@@ -1,14 +1,134 @@
 <!-- Allgemeine Oel-Ansicht -->
 <div class="container mt-4">
   <div class="row">
-    <div class="col-6 col-sm-3" *ngFor="let oil of oils">
+    <div class="col-6 col-sm-3" *ngFor="let oil of oils" data-bs-toggle="modal" data-bs-target="#detailView"
+         (click)="setActiveOil(oil)">
       <div class="card h-100">
-        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produktbild: {{oil.name}}">
+        <img src="{{oil.pictures[0]}}" class="card-img-top" alt="Produktbild: {{oil.name}}">
         <div class="card-body">
           <h5 class="card-title titleDisplay">{{oil.name}}</h5>
           <p class="card-text descriptionDisplay">{{oil.description}}</p>
-          <p class="card-text priceDisplay" >€ {{oil.price}}</p>
+          <p class="card-text priceDisplay">€ {{oil.price}}</p>
+          <div *ngIf="!oil.availability" class="overlay">
+            <p class="text-danger">Zurzeit nicht verfügbar!</p>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Detail-Popup-Ansicht -->
+<div class="modal fade" tabindex="-1" role="dialog" id="detailView" data-bs-backdrop="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{activeOil?.name}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="setEditingModeActive(false)"></button>
+      </div>
+      <div class="modal-body">
+        <div id="oilCarousel" class="carousel slide">
+          <div class="carousel-indicators">
+            <button *ngFor="let picture of activeOil?.pictures; let i = index"
+                    type="button" data-bs-target="#oilCarousel" [attr.data-bs-slide-to]="i"
+                    [ngClass]="{'active': i===0}"></button>
+          </div>
+          <div class="carousel-inner">
+            <div *ngFor="let picture of activeOil?.pictures; let i = index"
+                 class="carousel-item" [ngClass]="{'active': i===0}">
+              <img [src]="picture" class="d-block w-100">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#oilCarousel"
+                  data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#oilCarousel"
+                  data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+
+        <br>
+        <p [hidden]="isEditingModeActive">{{activeOil?.description}}</p>
+
+        <div class="row">
+          <div class="col-6">
+            <button class="button"
+                    [disabled]="isEditingModeActive"
+                    (click)="setEditingModeActive(true)">Bearbeiten
+            </button>
+          </div>
+          <div class="col-6 priceDisplay" [hidden]="isEditingModeActive">
+            <h5>€ {{activeOil?.price}}</h5>
+          </div>
+        </div>
+
+        <hr>
+        <h5>Produktdetails <a *ngIf="isEditingModeActive">bearbeiten</a>:</h5>
+        <table class="oilDetails" *ngIf="!isEditingModeActive">
+          <tr>
+            <th>Inhaltsstoffe:</th>
+            <td>{{activeOil?.ingredients?.join(', ')}}</td>
+          </tr>
+          <tr>
+            <th>Nettovolumen:</th>
+            <td>{{activeOil?.bottle_size}} ml</td>
+          </tr>
+          <tr>
+            <th>Herkunftsland:</th>
+            <td>{{activeOil?.origin}}</td>
+          </tr>
+        </table>
+
+        <form *ngIf="isEditingModeActive">
+          <table class="oilDetails">
+            <tr>
+              <th>Name:</th>
+              <td><input type="text" id="tfName" placeholder="{{activeOil?.name}}" value="{{activeOil?.name}}" required>
+              </td>
+            </tr>
+            <tr>
+              <th>Beschreibung:</th>
+              <td><textarea id="taDescription" placeholder="{{activeOil?.description}}" rows="4" cols="23"
+                            value="{{activeOil?.description}}" required></textarea></td>
+            </tr>
+            <tr>
+              <th>Preis:</th>
+              <td><input type="number" id="tfPrice" placeholder="{{activeOil?.price}}" value="{{activeOil?.price}}"
+                         step=".01" required> €
+              </td>
+            </tr>
+            <tr>
+              <th>Nettovolumen:</th>
+              <td><input type="number" id="tfBottleSize" placeholder="{{activeOil?.bottle_size}}"
+                         value="{{activeOil?.bottle_size}}" required> ml
+              </td>
+            </tr>
+            <tr>
+              <th>Herkunftsland:</th>
+              <td><input type="text" id="tfOrigin" placeholder="{{activeOil?.origin}}" value="{{activeOil?.origin}}"
+                         required></td>
+            </tr>
+            <tr>
+              <th>Artikel auf Lager?</th>
+              <td><input type="checkbox" id="cbAvailability" checked="{{activeOil?.availability}}"></td>
+            </tr>
+            <tr>
+              <th>Inhaltsstoffe:</th>
+              <td><input type="text" id="tfIngredients" placeholder="{{activeOil?.ingredients}}"
+                         value="{{activeOil?.ingredients}}" required></td>
+            </tr>
+            <tr>
+              <th>Bilder:</th>
+              <td><input type="file" accept="image/*" id="imgPictures" multiple></td>
+            </tr>
+          </table>
+          <button class="button" type="submit" (click)="updateOil(activeOil)">Speichern</button>
+          <button class="button" type="reset" (click)="setEditingModeActive(false)">Abbrechen</button>
+        </form>
       </div>
     </div>
   </div>

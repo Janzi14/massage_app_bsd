@@ -41,7 +41,9 @@
       "ingredients": ["Mandelöl", "Lavendelöl", "Vitamin E"],
       "bottle_size": 150,
       "price": 12.99,
-      "availability": true
+      "availability": true,
+      "origin": "Deutschland",
+      "pictures": ["./assets/oil/lavender1.png", "./assets/oil/lavender2.png"]
     },
     {
       "id": 2,
@@ -50,7 +52,9 @@
       "ingredients": ["Jojobaöl", "Eukalyptusöl", "Minzöl", "Vitamin C"],
       "bottle_size": 130,
       "price": 17.99,
-      "availability": true
+      "availability": true,
+      "origin": "Australien",
+      "pictures": ["./assets/oil/eucalyptus1.png", "./assets/oil/eucalyptus2.png"]
     },
     {
       "id": 3,
@@ -59,7 +63,9 @@
       "ingredients": ["Kokosöl", "Arganöl", "Vitamin A", "Vitamin E"],
       "bottle_size": 250,
       "price": 15.99,
-      "availability": false
+      "availability": false,
+      "origin": "Panama",
+      "pictures": ["./assets/oil/coconut1.png", "./assets/oil/coconut2.png", "./assets/oil/coconut3.png"]
     },
     {
       "id": 4,
@@ -68,7 +74,9 @@
       "ingredients": ["Traubenkernöl", "Orangenöl", "Zitronenöl", "Vitamin C"],
       "bottle_size": 160,
       "price": 13.99,
-      "availability": true
+      "availability": true,
+      "origin": "Kuba",
+      "pictures": ["./assets/oil/citrusorange1.png", "./assets/oil/citrusorange2.png", "./assets/oil/citrusorange3.png"]
     }
   ]
 }
