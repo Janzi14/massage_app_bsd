@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Treatment} from "../../../../types/treatments";
 import {NgIf} from "@angular/common";
 
@@ -22,23 +22,20 @@ export class TreatmentCardFormComponent {
 
   ngOnInit() {
     this.form = new FormGroup({
-      name: new FormControl(this.treatment?.name || ''),
-      description: new FormControl(this.treatment?.description || ''),
-      price_in_euro: new FormControl(this.treatment?.price_in_euro || 0),
-      body_part: new FormControl(this.treatment?.body_part || ''),
-      available: new FormControl(this.treatment?.available || false),
+      name: new FormControl(this.treatment?.name, Validators.required),
+      description: new FormControl(this.treatment?.description),
+      price_in_euro: new FormControl(this.treatment?.price_in_euro),
+      body_part: new FormControl(this.treatment?.body_part),
+      available: new FormControl(this.treatment?.available|| false),
     });
   }
 
   onSubmit() {
-    if (this.form?.valid) {
-      this.save.emit(this.form.value);
-      console.log(this.form.value);
-    }
+    if (this.form?.valid) this.save.emit(this.form.value);
+
   }
 
   onCancel() {
-    // Emit cancel event
     this.cancel.emit();
   }
 }

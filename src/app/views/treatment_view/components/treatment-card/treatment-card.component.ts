@@ -15,12 +15,13 @@ import {TreatmentCardFormComponent} from "../treatment-card-form/treatment-card-
 export class TreatmentCardComponent {
   @Input() treatment?: Treatment;
   @Output() delete: EventEmitter<any> = new EventEmitter();
+  @Output() update: EventEmitter<any> = new EventEmitter();
 
   isEditing = false;
 
 
   onDelete(id:string){
-      this.delete.emit(id); // Emit the event
+      this.delete.emit(id);
   }
 
 
@@ -28,8 +29,8 @@ export class TreatmentCardComponent {
     this.isEditing = true;
   }
 
-  onSave(updatedTreatment: Treatment) {
-    console.log('Updated Treatment:', updatedTreatment);
+  onSave(updatedTreatment: Treatment, id:string) {
+    this.update.emit({...updatedTreatment, id});
     this.isEditing = false;
   }
 

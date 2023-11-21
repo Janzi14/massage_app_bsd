@@ -1,25 +1,26 @@
-<div>
+<div class="bg-body-secondary">
   <div class="card-header text-success">Bearbeiten</div>
   <form [formGroup]="form" (submit)="onSubmit()" class="list-group list-group-flush">
+    <div>{{form.errors}}</div>
     <label>Name:</label>
-    <input type="text" formControlName="name"/>
+    <input type="text" formControlName="name" required/>
 
     <label>Beschreiben:</label>
-    <input type="text" formControlName="description"/>
+    <input type="text" formControlName="description" required/>
 
     <label>Preis (€/Stunde):</label>
-    <input type="number" formControlName="price_in_euro"/>
+    <input type="number" formControlName="price_in_euro" required/>
 
     <label>Körperteil:</label>
-    <input type="text" formControlName="body_part"/>
+    <input type="text" formControlName="body_part" required/>
 
     <label>Verfügbar:</label>
     <input type="checkbox" formControlName="available"/>
 
-    <div class="list-group-item d-flex justify-content-evenly">
+    <div class="list-group-item d-flex justify-content-evenly bg-body-secondary">
       <button type="button" class="btn btn-outline-danger rounded-circle" (click)="onCancel()"><i
         class="bi bi-x-lg"></i></button>
-      <button type="submit" class="btn btn-outline-success rounded-circle"><i class="bi bi-floppy"></i></button>
+      <button type="submit" class="btn btn-outline-success rounded-circle" [disabled]="!form.valid" ><i class="bi bi-floppy"></i></button>
 
     </div>
   </form>

@@ -17,5 +17,11 @@ export class TreatmentService {
   deleteTreatment(id: string) {
     return this.http.delete(`${this.url}/${id}`)
   }
+  updateTreatment(treatment: Treatment) {
+    return this.http.patch(`${this.url}/${treatment.id}`, treatment)
+  }
+  addTreatment(treatment: Treatment) {
+    return this.http.post(`${this.url}`, treatment)
+  }
 
 }
