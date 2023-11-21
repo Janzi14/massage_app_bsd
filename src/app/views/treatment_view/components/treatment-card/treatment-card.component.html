@@ -1,11 +1,16 @@
 <div>
-    <div class="card-header text-success">
-        {{treatment?.name}}
-    </div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item text-secondary">{{treatment?.description}}</li>
-        <li class="list-group-item text-secondary">{{treatment?.price_in_euro}}</li>
-        <li class="list-group-item text-secondary">{{treatment?.body_part}}</li>
-        <li class="list-group-item text-secondary">{{treatment?.duration_in_min}}</li>
-    </ul>
+  <div class="card-header text-success">
+    {{treatment?.name}}
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item text-secondary">{{treatment?.description}}</li>
+    <li class="list-group-item text-secondary">{{treatment?.price_in_euro}}€/Stunde</li>
+    <li class="list-group-item text-secondary">{{treatment?.body_part}}</li>
+    <li class="list-group-item text-white"
+        [class]="treatment?.available?'bg-success': 'bg-danger'">{{treatment?.available ? "Verfügbar" : "Nicht verfügbar"}}</li>
+    <li class="list-group-item d-flex justify-content-evenly">
+      <button type="button" class="btn btn-outline-danger rounded-circle"><i class="bi bi-trash3"></i></button>
+      <button type="button" class="btn btn-outline-success rounded-circle"><i class="bi bi-pencil"></i></button>
+    </li>
+  </ul>
 </div>
