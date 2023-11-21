@@ -1,8 +1,22 @@
-#description{
-  width: 20%;
+.priceDisplay {
+  text-align: right;
 }
 
-td, th{
+.descriptionDisplay {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Text auf 3 Zeilen begrenzen */
+  -webkit-box-orient: vertical;
+}
+
+.titleDisplay {
+  line-height: 1.3em;
+  height: 2.6em; /* Line-Height * 2, da für den Titel 2 Zeilen reserviert werden sollen */
+  overflow: hidden;
+}
+
+td, th {
   vertical-align: center;
 }
 

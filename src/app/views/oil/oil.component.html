@@ -1,23 +1,15 @@
-<table class="table-striped" >
-  <tr>
-    <th>Name</th>
-    <th>Beschreibung</th>
-    <th>Inhaltsstoffe</th>
-    <th>Flaschengröße</th>
-    <th>Preis</th>
-    <th></th>
-  </tr>
-  <tr *ngFor="let oil of oils">
-    <td>{{oil.name}}</td>
-    <td id="description">{{oil.description}}</td>
-    <td>
-      <ul>
-        <li *ngFor="let ingredient of oil.ingredients">{{ingredient}}</li>
-      </ul>
-    </td>
-    <td>{{oil.bottle_size}} ml</td>
-    <td>€{{oil.price}}</td>
-    <td *ngIf="oil.availability; else notAvailable">Auf Lager</td>
-    <ng-template #notAvailable>Ausverkauft</ng-template>
-  </tr>
-</table>
+<!-- Allgemeine Oel-Ansicht -->
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-6 col-sm-3" *ngFor="let oil of oils">
+      <div class="card h-100">
+        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produktbild: {{oil.name}}">
+        <div class="card-body">
+          <h5 class="card-title titleDisplay">{{oil.name}}</h5>
+          <p class="card-text descriptionDisplay">{{oil.description}}</p>
+          <p class="card-text priceDisplay" >€ {{oil.price}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
