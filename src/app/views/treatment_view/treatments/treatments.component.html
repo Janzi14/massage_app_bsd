@@ -1,5 +1,6 @@
 <ul class="container row mx-auto">
-    <app-treatment-card *ngFor="let treatment of treatments" [treatment]="treatment"
-                        class="card col-sm-6 col-md-4 col-lg-3 border-0">
-    </app-treatment-card>
+  <app-treatment-card *ngFor="let treatment of treatments" [treatment]="treatment"
+                      class="card col-sm-6 col-md-4 col-lg-3 border-0"
+                      (delete)="onDelete($event)">
+  </app-treatment-card>
 </ul>

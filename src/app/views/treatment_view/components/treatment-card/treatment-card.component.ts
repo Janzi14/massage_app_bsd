@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Treatment} from "../../../../types/treatments";
 @Component({
   selector: 'app-treatment-card',
@@ -8,4 +8,10 @@ import {Treatment} from "../../../../types/treatments";
 })
 export class TreatmentCardComponent {
   @Input() treatment?: Treatment;
+  @Output() delete: EventEmitter<any> = new EventEmitter();
+
+
+  onDelete(id:string){
+      this.delete.emit(id); // Emit the event
+  }
 }

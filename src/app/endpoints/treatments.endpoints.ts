@@ -6,10 +6,16 @@ import {Treatment} from "../types/treatments";
 @Injectable({providedIn: 'root'})
 export class TreatmentService {
   private url = "http://localhost:3000/treatments";
+
   constructor(private http: HttpClient) {
   }
 
   getTreatments(): Observable<Treatment[]> {
     return this.http.get<Treatment[]>(`${this.url}`)
   }
+
+  deleteTreatment(id: string) {
+    return this.http.delete(`${this.url}/${id}`)
+  }
+
 }
