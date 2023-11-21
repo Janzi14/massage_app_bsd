@@ -1,4 +1,4 @@
-<table>
+<table class="table-striped" >
   <tr>
     <th>Name</th>
     <th>Beschreibung</th>
@@ -9,8 +9,12 @@
   </tr>
   <tr *ngFor="let oil of oils">
     <td>{{oil.name}}</td>
-    <td>{{oil.description}}</td>
-    <td>{{oil.ingredients}}</td>
+    <td id="description">{{oil.description}}</td>
+    <td>
+      <ul>
+        <li *ngFor="let ingredient of oil.ingredients">{{ingredient}}</li>
+      </ul>
+    </td>
     <td>{{oil.bottle_size}} ml</td>
     <td>€{{oil.price}}</td>
     <td *ngIf="oil.availability; else notAvailable">Auf Lager</td>

@@ -18,7 +18,7 @@ export class OilComponent {
   constructor(private oilService: OilService) {}
 
   ngOnInit(): void {
-    this.oilService.getOils().subscribe((data) => {
+    this.oilService.getOils().subscribe(data => {
       console.log(data);
       this.oils = data});
   }
