@@ -2,13 +2,16 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Treatment} from "../../../../types/treatments";
 import {NgIf} from "@angular/common";
 import {TreatmentCardFormComponent} from "../treatment-card-form/treatment-card-form.component";
+import {RouterLink} from "@angular/router";
+
 @Component({
   selector: 'app-treatment-card',
   templateUrl: './treatment-card.component.html',
   styleUrls: ['./treatment-card.component.css'],
   imports: [
     NgIf,
-    TreatmentCardFormComponent
+    TreatmentCardFormComponent,
+    RouterLink
   ],
   standalone: true
 })
@@ -20,8 +23,8 @@ export class TreatmentCardComponent {
   isEditing = false;
 
 
-  onDelete(id:string){
-      this.delete.emit(id);
+  onDelete(id: string) {
+    this.delete.emit(id);
   }
 
 
@@ -29,7 +32,7 @@ export class TreatmentCardComponent {
     this.isEditing = true;
   }
 
-  onSave(updatedTreatment: Treatment, id:string) {
+  onSave(updatedTreatment: Treatment, id: string) {
     this.update.emit({...updatedTreatment, id});
     this.isEditing = false;
   }

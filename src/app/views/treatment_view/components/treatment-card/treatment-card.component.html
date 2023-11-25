@@ -1,4 +1,4 @@
-<div *ngIf="!isEditing; else editTemplate">
+<div *ngIf="!isEditing; else editTemplate" [routerLink]="['/treatments/details', treatment?.id]">
   <div class="card-header text-success">
     {{treatment?.name}}
   </div>
