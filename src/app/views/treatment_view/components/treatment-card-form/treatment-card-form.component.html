@@ -17,10 +17,16 @@
     <label>Verfügbar:</label>
     <input type="checkbox" formControlName="available"/>
 
+    <div *ngFor="let name of Object.keys(form.controls)">
+      <div [hidden]="form.get(name)?.pristine || form.get(name)?.valid" class="alert alert-danger">
+        {{form.get(name)?.getError("range").message}}</div>
+    </div>
+
     <div class="list-group-item d-flex justify-content-evenly bg-body-secondary">
       <button type="button" class="btn btn-outline-danger rounded-circle" (click)="onCancel()"><i
         class="bi bi-x-lg"></i></button>
-      <button type="submit" class="btn btn-outline-success rounded-circle" [disabled]="!form.valid" ><i class="bi bi-floppy"></i></button>
+      <button type="submit" class="btn btn-outline-success rounded-circle" [disabled]="!form.valid"><i
+        class="bi bi-floppy"></i></button>
 
     </div>
   </form>
