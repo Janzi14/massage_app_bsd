@@ -1,7 +1,9 @@
 <ul class="container row mx-auto">
-  <button type="button" class="btn btn-outline-primary mb-4" (click)="isAdding=true">Behandlung hinzufügen<i
-    class="mx-2 bi bi-plus-circle"></i></button>
+  <app-treatment-search (filter)="onFilter($event)" class="mb-4 col-10 mx-auto"/>
 
+  <button type="button" class="btn btn-outline-secondary col-10 mx-auto mb-4" (click)="isAdding=true">Behandlung
+    hinzufügen<i
+      class="mx-2 bi bi-plus-circle"></i></button>
 
   <app-treatment-card-form *ngIf="isAdding" (save)="onAdd($event)"
                            (cancel)="isAdding=false" class="mb-4"/>
@@ -10,4 +12,5 @@
                       class="card col-sm-6 col-md-4 col-lg-3 border-0"
                       (delete)="onDelete($event)"
                       (update)="onUpdate($event)"/>
+
 </ul>

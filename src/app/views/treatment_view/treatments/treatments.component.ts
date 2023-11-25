@@ -4,6 +4,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {Treatment} from "../../../types/treatments";
 import {TreatmentCardComponent} from "../components/treatment-card/treatment-card.component";
 import {TreatmentCardFormComponent} from "../components/treatment-card-form/treatment-card-form.component";
+import {TreatmentSearchComponent} from "../components/treatment-search/treatment-search.component";
 
 @Component({
   selector: 'app-treatments',
@@ -13,7 +14,8 @@ import {TreatmentCardFormComponent} from "../components/treatment-card-form/trea
     NgForOf,
     TreatmentCardComponent,
     NgIf,
-    TreatmentCardFormComponent
+    TreatmentCardFormComponent,
+    TreatmentSearchComponent
   ],
   standalone: true
 })
@@ -74,5 +76,13 @@ export class TreatmentsComponent {
         console.error(error);
       },
     });
+  }
+
+  onFilter(name: string | undefined) {
+    if (typeof name === "string") {
+      this.treatments = this.treatments?.filter((treatment) => treatment.name.toLowerCase().includes(name.toLowerCase()))
+    } else {
+      this.getTreatments()
+    }
   }
 }
