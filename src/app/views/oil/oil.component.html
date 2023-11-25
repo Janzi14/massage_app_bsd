@@ -56,7 +56,7 @@
 
         <div class="row">
           <div class="col-6">
-            <button class="button"
+            <button type="button" class="btn btn-secondary"
                     [disabled]="isEditingModeActive"
                     (click)="setEditingModeActive(true)">Bearbeiten
             </button>
@@ -66,9 +66,9 @@
           </div>
         </div>
 
-        <hr>
+        <hr/>
         <h5>Produktdetails <a *ngIf="isEditingModeActive">bearbeiten</a>:</h5>
-        <table class="oilDetails" *ngIf="!isEditingModeActive">
+        <table class="table oilDetails" *ngIf="!isEditingModeActive">
           <tr>
             <th>Inhaltsstoffe:</th>
             <td>{{activeOil?.ingredients?.join(', ')}}</td>
@@ -83,52 +83,141 @@
           </tr>
         </table>
 
-        <form *ngIf="isEditingModeActive">
-          <table class="oilDetails">
-            <tr>
-              <th>Name:</th>
-              <td><input type="text" id="tfName" placeholder="{{activeOil?.name}}" value="{{activeOil?.name}}" required>
-              </td>
-            </tr>
-            <tr>
-              <th>Beschreibung:</th>
-              <td><textarea id="taDescription" placeholder="{{activeOil?.description}}" rows="4" cols="23"
-                            value="{{activeOil?.description}}" required></textarea></td>
-            </tr>
-            <tr>
-              <th>Preis:</th>
-              <td><input type="number" id="tfPrice" placeholder="{{activeOil?.price}}" value="{{activeOil?.price}}"
-                         step=".01" required> €
-              </td>
-            </tr>
-            <tr>
-              <th>Nettovolumen:</th>
-              <td><input type="number" id="tfBottleSize" placeholder="{{activeOil?.bottle_size}}"
-                         value="{{activeOil?.bottle_size}}" required> ml
-              </td>
-            </tr>
-            <tr>
-              <th>Herkunftsland:</th>
-              <td><input type="text" id="tfOrigin" placeholder="{{activeOil?.origin}}" value="{{activeOil?.origin}}"
-                         required></td>
-            </tr>
-            <tr>
-              <th>Artikel auf Lager?</th>
-              <td><input type="checkbox" id="cbAvailability" checked="{{activeOil?.availability}}"></td>
-            </tr>
-            <tr>
-              <th>Inhaltsstoffe:</th>
-              <td><input type="text" id="tfIngredients" placeholder="{{activeOil?.ingredients}}"
-                         value="{{activeOil?.ingredients}}" required></td>
-            </tr>
-            <tr>
-              <th>Bilder:</th>
-              <td><input type="file" accept="image/*" id="imgPictures" multiple></td>
-            </tr>
-          </table>
-          <button class="button" type="submit" (click)="updateOil(activeOil)">Speichern</button>
-          <button class="button" type="reset" (click)="setEditingModeActive(false)">Abbrechen</button>
-        </form>
+        <div *ngIf="isEditingModeActive">
+          <div *ngIf="editForm.invalid">
+            <!--NAME-->
+            <div *ngIf="editForm.get('inputName')?.hasError('nameNullError')"
+                 class="alert alert-danger">{{editForm.getError('nameNullError', 'inputName')}}</div>
+            <div *ngIf="editForm.get('inputName')?.hasError('nameLengthError')"
+                 class="alert alert-danger">{{editForm.getError('nameLengthError', 'inputName')}}</div>
+
+            <!--DESCRIPTION-->
+            <div *ngIf="editForm.get('inputDescription')?.hasError('descriptionNullError')"
+                 class="alert alert-danger">{{editForm.getError('descriptionNullError', 'inputDescription')}}</div>
+            <div *ngIf="editForm.get('inputDescription')?.hasError('descriptionLengthError')"
+                 class="alert alert-danger">{{editForm.getError('descriptionLengthError', 'inputDescription')}}</div>
+
+            <!--PRICE-->
+            <div *ngIf="editForm.get('inputPrice')?.hasError('priceNotPositiveError')"
+                 class="alert alert-danger">{{editForm.getError('priceNotPositiveError', 'inputPrice')}}</div>
+
+            <!--BOTTLESIZE-->
+            <div *ngIf="editForm.get('inputBottleSize')?.hasError('bottleSizeNotPositiveError')"
+                 class="alert alert-danger">{{editForm.getError('bottleSizeNotPositiveError', 'inputBottleSize')}}</div>
+            <div *ngIf="editForm.get('inputBottleSize')?.hasError('bottleSizeVolumeError')"
+                 class="alert alert-danger">{{editForm.getError('bottleSizeVolumeError', 'inputBottleSize')}}</div>
+
+            <!--INGREDIENT-->
+            <div
+              *ngIf="editForm.get('inputIngredients')?.dirty && editForm.get('inputIngredients')?.hasError('ingredientLengthError')"
+              class="alert alert-danger">{{editForm.getError('ingredientLengthError', 'inputIngredients')}}</div>
+            <!--INGREDIENT-LIST-->
+            <div *ngIf="ingredientList.length<1 && editForm.get('ingredientList')?.hasError('ingredientListNullError')"
+                 class="alert alert-danger">{{editForm.getError('ingredientListNullError', 'ingredientList')}}</div>
+            <div *ngIf="editForm.get('ingredientList')?.hasError('ingredientListLengthError')"
+                 class="alert alert-danger">{{editForm.getError('ingredientListLengthError', 'ingredientList')}}</div>
+
+
+          </div>
+
+          <form class="form-group" [formGroup]="editForm" (ngSubmit)="updateOil(activeOil)">
+            <table class="table oilDetails">
+              <tr>
+                <th>Name:</th>
+                <td><input type="text" class="form-control" formControlName="inputName"
+                           placeholder="{{activeOil?.name}}"
+                           ngModel="{{activeOil?.name}}">
+                </td>
+              </tr>
+              <tr>
+                <th>Beschreibung:</th>
+                <td><textarea class="form-control" formControlName="inputDescription"
+                              placeholder="{{activeOil?.description}}" rows="4"
+                              cols="23" ngModel="{{activeOil?.description}}"></textarea></td>
+              </tr>
+              <tr>
+                <th>Preis:</th>
+                <td>
+                  <div class="input-group">
+                    <input type="number" class="form-control" formControlName="inputPrice"
+                           placeholder="{{activeOil?.price}}"
+                           ngModel="{{activeOil?.price}}"
+                           step=".01">
+                    <div class="input-group-append">
+                      <span class="input-group-text">€</span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>Nettovolumen:</th>
+                <td>
+                  <div class="input-group">
+                    <input type="number" class="form-control" formControlName="inputBottleSize"
+                           placeholder="{{activeOil?.bottle_size}}"
+                           ngModel="{{activeOil?.bottle_size}}">
+                    <div class="input-group-append">
+                      <span class="input-group-text">ml</span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>Herkunftsland:</th>
+                <td><input type="text" class="form-control" formControlName="inputOrigin"
+                           placeholder="{{activeOil?.origin}}"
+                           ngModel="{{activeOil?.origin}}"></td>
+              </tr>
+              <tr>
+                <th>Artikel auf Lager?</th>
+                <td><input type="checkbox" class="form-check-input" formControlName="inputAvailability"
+                           [ngModel]="activeOil?.availability"></td>
+              </tr>
+              <tr>
+                <th>Inhaltsstoffe:</th>
+                <td>
+                  <div>
+                    <input type="text" class="form-control" formControlName="inputIngredients"
+                           [(ngModel)]="newIngredient">
+                    <button class="ingredientBtn btn btn-outline-success" title="Inhaltsstoff hinzufügen"
+                            (click)="addIngredient();">+
+                    </button>
+                    <button class="ingredientBtn btn btn-outline-danger" title="Letzten Inhaltsstoff löschen"
+                            (click)="deleteIngredient();">-
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th></th>
+                <td>
+                  <a id="ingredientListShow">{{ingredientList.join(', ')}}</a>
+                </td>
+              </tr>
+              <tr>
+                <th>Bilder:</th>
+                <td><input type="file" class="form-control-file" accept="image/*" multiple></td>
+              </tr>
+            </table>
+            <hr/>
+            <table class="buttonTable">
+              <tr>
+                <td>
+                  <button class="btn btn-success" type="submit" title="Speichern"><i class="bi bi-floppy-fill"></i>
+                  </button>
+                </td>
+                <td>
+                  <button class="btn btn-secondary" type="reset" title="Formular leeren" (click)="ingredientList = [];"><i
+                    class="bi bi-trash-fill"></i></button>
+                </td>
+                <td>
+                  <button class="btn btn-danger" type="reset" title="Abbrechen" (click)="setEditingModeActive(false)"><i
+                    class="bi bi-x-lg"></i></button>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </div>
       </div>
     </div>
   </div>
