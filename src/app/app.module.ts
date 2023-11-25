@@ -13,7 +13,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     NgbModule,
     ReactiveFormsModule
   ],
-  providers: [provideRouter(routes),  provideHttpClient()],
+  providers: [provideRouter(routes), provideHttpClient()],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}

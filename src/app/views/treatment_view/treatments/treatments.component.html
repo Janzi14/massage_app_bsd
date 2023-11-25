@@ -1,16 +1,16 @@
 <ul class="container row mx-auto">
   <app-treatment-search (filter)="onFilter($event)" class="mb-4 col-10 mx-auto"/>
 
-  <button type="button" class="btn btn-outline-secondary col-10 mx-auto mb-4" (click)="isAdding=true">Behandlung
+  <button (click)="isAdding=true" class="btn btn-outline-secondary col-10 mx-auto mb-4" type="button">Behandlung
     hinzufügen<i
       class="mx-2 bi bi-plus-circle"></i></button>
 
-  <app-treatment-card-form *ngIf="isAdding" (save)="onAdd($event)"
-                           (cancel)="isAdding=false" class="mb-4"/>
+  <app-treatment-card-form (cancel)="isAdding=false" (save)="onAdd($event)"
+                           *ngIf="isAdding" class="mb-4"/>
 
-  <app-treatment-card *ngFor="let treatment of treatments" [treatment]="treatment"
-                      class="card col-sm-6 col-md-4 col-lg-3 border-0"
-                      (delete)="onDelete($event)"
-                      (update)="onUpdate($event)"/>
+  <app-treatment-card (delete)="onDelete($event)" (update)="onUpdate($event)"
+                      *ngFor="let treatment of treatments"
+                      [treatment]="treatment"
+                      class="card col-sm-6 col-md-4 col-lg-3 border-0"/>
 
 </ul>

@@ -1,21 +1,21 @@
 <div class="bg-body-secondary">
   <div class="card-header text-success">Bearbeiten</div>
-  <form [formGroup]="form" (submit)="onSubmit()" class="list-group list-group-flush">
+  <form (submit)="onSubmit()" [formGroup]="form" class="list-group list-group-flush">
     <div>{{form.errors}}</div>
     <label>Name:</label>
-    <input type="text" formControlName="name" required/>
+    <input formControlName="name" required type="text"/>
 
     <label>Beschreiben:</label>
-    <input type="text" formControlName="description" required/>
+    <input formControlName="description" required type="text"/>
 
     <label>Preis (€/Stunde):</label>
-    <input type="number" formControlName="price_in_euro" required/>
+    <input formControlName="price_in_euro" required type="number"/>
 
     <label>Körperteil:</label>
-    <input type="text" formControlName="body_part" required/>
+    <input formControlName="body_part" required type="text"/>
 
     <label>Verfügbar:</label>
-    <input type="checkbox" formControlName="available"/>
+    <input formControlName="available" type="checkbox"/>
 
     <div *ngFor="let name of Object.keys(form.controls)">
       <div [hidden]="form.get(name)?.pristine || form.get(name)?.valid" class="alert alert-danger">
@@ -23,9 +23,9 @@
     </div>
 
     <div class="list-group-item d-flex justify-content-evenly bg-body-secondary">
-      <button type="button" class="btn btn-outline-danger rounded-circle" (click)="onCancel()"><i
+      <button (click)="onCancel()" class="btn btn-outline-danger rounded-circle" type="button"><i
         class="bi bi-x-lg"></i></button>
-      <button type="submit" class="btn btn-outline-success rounded-circle" [disabled]="!form.valid"><i
+      <button [disabled]="!form.valid" class="btn btn-outline-success rounded-circle" type="submit"><i
         class="bi bi-floppy"></i></button>
 
     </div>

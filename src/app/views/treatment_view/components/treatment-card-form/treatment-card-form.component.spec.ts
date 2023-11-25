@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TreatmentCardFormComponent } from './treatment-card-form.component';
+import {TreatmentCardFormComponent} from './treatment-card-form.component';
 
 describe('TreatmentCardFormComponent', () => {
   let component: TreatmentCardFormComponent;

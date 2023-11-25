@@ -21,6 +21,7 @@ export class TreatmentCardFormComponent {
   @Output() cancel = new EventEmitter<void>();
 
   form: FormGroup = new FormGroup({});
+  protected readonly Object = Object;
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -40,6 +41,4 @@ export class TreatmentCardFormComponent {
   onCancel() {
     this.cancel.emit();
   }
-
-  protected readonly Object = Object;
 }

@@ -1,4 +1,4 @@
-<div *ngIf="!isEditing; else editTemplate" [routerLink]="['/treatments/details', treatment?.id]">
+<div *ngIf="!isEditing; else editTemplate" [routerLink]="['/treatments/details', treatment?.id]" class="treatment-card">
   <div class="card-header text-success">
     {{treatment?.name}}
   </div>
@@ -6,20 +6,20 @@
     <li class="list-group-item text-secondary">{{treatment?.description}}</li>
     <li class="list-group-item text-secondary">{{treatment?.price_in_euro}}€/Stunde</li>
     <li class="list-group-item text-secondary">{{treatment?.body_part}}</li>
-    <li class="list-group-item text-white"
-        [class]="treatment?.available?'bg-success': 'bg-danger'">{{treatment?.available ? "Verfügbar" : "Nicht verfügbar"}}</li>
+    <li [class]="treatment?.available?'bg-success': 'bg-danger'"
+        class="list-group-item text-white">{{treatment?.available ? "Verfügbar" : "Nicht verfügbar"}}</li>
     <li class="list-group-item d-flex justify-content-evenly">
-      <button type="button" class="btn btn-outline-danger rounded-circle" (click)="onDelete(treatment?.id ?? '')">
+      <button (click)="onDelete(treatment?.id ?? '')" class="btn btn-outline-danger rounded-circle" type="button">
         <i class=" bi bi-trash3"></i></button>
-      <button type="button" class="btn btn-outline-success rounded-circle" (click)="startEditing()"><i
+      <button (click)="startEditing()" class="btn btn-outline-success rounded-circle" type="button"><i
         class="bi bi-pencil"></i></button>
     </li>
   </ul>
 </div>
 <ng-template #editTemplate>
   <!-- Display the treatment form when editing -->
-  <app-treatment-card-form *ngIf="treatment"
-                           [treatment]="treatment"
+  <app-treatment-card-form (cancel)="onCancelEdit()"
                            (save)="onSave($event, treatment.id)"
-                           (cancel)="onCancelEdit()"/>
+                           *ngIf="treatment"
+                           [treatment]="treatment"/>
 </ng-template>
