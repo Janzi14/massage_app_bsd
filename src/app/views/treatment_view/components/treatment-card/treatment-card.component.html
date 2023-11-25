@@ -9,9 +9,11 @@
     <li [class]="treatment?.available?'bg-success': 'bg-danger'"
         class="list-group-item text-white">{{treatment?.available ? "Verfügbar" : "Nicht verfügbar"}}</li>
     <li class="list-group-item d-flex justify-content-evenly">
-      <button (click)="onDelete(treatment?.id ?? '')" class="btn btn-outline-danger rounded-circle" type="button">
+      <button (click)="onDelete(treatment?.id ?? ''); $event.stopPropagation()"
+              class="btn btn-outline-danger rounded-circle" type="button">
         <i class=" bi bi-trash3"></i></button>
-      <button (click)="startEditing()" class="btn btn-outline-success rounded-circle" type="button"><i
+      <button (click)="startEditing(); $event.stopPropagation()" class="btn btn-outline-success rounded-circle"
+              type="button"><i
         class="bi bi-pencil"></i></button>
     </li>
   </ul>

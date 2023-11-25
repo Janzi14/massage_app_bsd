@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Treatment} from "../../../types/treatments";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {TreatmentService} from "../../../endpoints/treatments.endpoints";
-import html2PDF from "jspdf-html2canvas";
 import {NgIf} from "@angular/common";
 
 @Component({
@@ -18,7 +17,6 @@ import {NgIf} from "@angular/common";
 export class TreatmentDetailComponent implements OnInit {
 
   treatment?: Treatment;
-  hideBack?: boolean
 
   constructor(private route: ActivatedRoute, private treatmentService: TreatmentService) {
   }
@@ -34,9 +32,14 @@ export class TreatmentDetailComponent implements OnInit {
     });
   }
 
-  async createImage() {
-    let page = document.getElementById("details-view");
-    if (page) await html2PDF(page);
+  readContentOutLoud() {
+    const content = document.getElementById('details-view');
+    if (content && content.textContent) {
+      const utterance = new SpeechSynthesisUtterance();
+      utterance.text = content.textContent;
+      utterance.lang = 'de-DE';
+      window.speechSynthesis.speak(utterance);
+    }
   }
 
   ngOnInit() {
