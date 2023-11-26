@@ -1,218 +1,250 @@
 <!-- Allgemeine Oel-Ansicht -->
 <div class="container mt-4">
-  <div class="row">
-    <div class="col-6 col-sm-3" *ngFor="let oil of oils" data-bs-toggle="modal" data-bs-target="#detailView"
-         (click)="setActiveOil(oil)">
-      <div class="card h-100">
-        <img src="{{oil.pictures[0]}}" class="card-img-top" alt="Produktbild: {{oil.name}}">
-        <div class="card-body">
-          <h5 class="card-title titleDisplay">{{oil.name}}</h5>
-          <p class="card-text descriptionDisplay">{{oil.description}}</p>
-          <p class="card-text priceDisplay">€ {{oil.price}}</p>
-          <div *ngIf="!oil.availability" class="overlay">
-            <p class="text-danger">Zurzeit nicht verfügbar!</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Detail-Popup-Ansicht -->
-<div class="modal fade" tabindex="-1" role="dialog" id="detailView" data-bs-backdrop="false">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">{{activeOil?.name}}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="setEditingModeActive(false)"></button>
-      </div>
-      <div class="modal-body">
-        <div id="oilCarousel" class="carousel slide">
-          <div class="carousel-indicators">
-            <button *ngFor="let picture of activeOil?.pictures; let i = index"
-                    type="button" data-bs-target="#oilCarousel" [attr.data-bs-slide-to]="i"
-                    [ngClass]="{'active': i===0}"></button>
-          </div>
-          <div class="carousel-inner">
-            <div *ngFor="let picture of activeOil?.pictures; let i = index"
-                 class="carousel-item" [ngClass]="{'active': i===0}">
-              <img [src]="picture" class="d-block w-100">
+    <div class="row">
+        <div class="col-6 col-sm-3" *ngFor="let oil of oils" data-bs-toggle="modal" data-bs-target="#detailView"
+             (click)="setActiveOil(oil)">
+            <div class="card h-100">
+                <img src="{{oil.pictures[0]}}" class="card-img-top" alt="Produktbild: {{oil.name}}">
+                <div class="card-body">
+                    <h5 class="card-title titleDisplay">{{oil.name}}</h5>
+                    <p class="card-text descriptionDisplay">{{oil.description}}</p>
+                    <p class="card-text priceDisplay">€ {{oil.price}}</p>
+                    <div *ngIf="!oil.availability" class="overlay">
+                        <p class="text-danger">Zurzeit nicht verfügbar!</p>
+                    </div>
+                </div>
             </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#oilCarousel"
-                  data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#oilCarousel"
-                  data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
         </div>
-
-        <br>
-        <p [hidden]="isEditingModeActive">{{activeOil?.description}}</p>
-
-        <div class="row">
-          <div class="col-6">
-            <button type="button" class="btn btn-secondary"
-                    [disabled]="isEditingModeActive"
-                    (click)="setEditingModeActive(true)">Bearbeiten
-            </button>
-          </div>
-          <div class="col-6 priceDisplay" [hidden]="isEditingModeActive">
-            <h5>€ {{activeOil?.price}}</h5>
-          </div>
-        </div>
-
-        <hr/>
-        <h5>Produktdetails <a *ngIf="isEditingModeActive">bearbeiten</a>:</h5>
-        <table class="table oilDetails" *ngIf="!isEditingModeActive">
-          <tr>
-            <th>Inhaltsstoffe:</th>
-            <td>{{activeOil?.ingredients?.join(', ')}}</td>
-          </tr>
-          <tr>
-            <th>Nettovolumen:</th>
-            <td>{{activeOil?.bottle_size}} ml</td>
-          </tr>
-          <tr>
-            <th>Herkunftsland:</th>
-            <td>{{activeOil?.origin}}</td>
-          </tr>
-        </table>
-
-        <div *ngIf="isEditingModeActive">
-          <div *ngIf="editForm.invalid">
-            <!--NAME-->
-            <div *ngIf="editForm.get('name')?.hasError('nameNullError')"
-                 class="alert alert-danger">{{editForm.getError('nameNullError', 'name')}}</div>
-            <div *ngIf="editForm.get('name')?.hasError('nameLengthError')"
-                 class="alert alert-danger">{{editForm.getError('nameLengthError', 'name')}}</div>
-
-            <!--DESCRIPTION-->
-            <div *ngIf="editForm.get('description')?.hasError('descriptionNullError')"
-                 class="alert alert-danger">{{editForm.getError('descriptionNullError', 'description')}}</div>
-            <div *ngIf="editForm.get('description')?.hasError('descriptionLengthError')"
-                 class="alert alert-danger">{{editForm.getError('descriptionLengthError', 'description')}}</div>
-
-            <!--PRICE-->
-            <div *ngIf="editForm.get('price')?.hasError('priceNotPositiveError')"
-                 class="alert alert-danger">{{editForm.getError('priceNotPositiveError', 'price')}}</div>
-
-            <!--BOTTLESIZE-->
-            <div *ngIf="editForm.get('bottle_size')?.hasError('bottleSizeNotPositiveError')"
-                 class="alert alert-danger">{{editForm.getError('bottleSizeNotPositiveError', 'bottle_size')}}</div>
-            <div *ngIf="editForm.get('bottle_size')?.hasError('bottleSizeVolumeError')"
-                 class="alert alert-danger">{{editForm.getError('bottleSizeVolumeError', 'bottle_size')}}</div>
-
-            <!--INGREDIENT-->
-            <div
-              *ngIf="editForm.get('newIngredient')?.dirty && editForm.get('newIngredient')?.hasError('ingredientLengthError')"
-              class="alert alert-danger">{{editForm.getError('ingredientLengthError', 'newIngredient')}}</div>
-            <!--INGREDIENT-LIST-->
-            <div *ngIf="ingredientList.length<1 && editForm.get('ingredientList')?.hasError('ingredientListNullError')"
-                 class="alert alert-danger">{{editForm.getError('ingredientListNullError', 'ingredientList')}}</div>
-
-
-          </div>
-
-          <form class="form-group" [formGroup]="editForm" (ngSubmit)="updateOil(activeOil)">
-            <table class="table oilDetails">
-              <tr>
-                <th>Name:</th>
-                <td><input type="text" class="form-control" formControlName="name"
-                           placeholder="{{activeOil?.name}}"
-                           ngModel="{{activeOil?.name}}">
-                </td>
-              </tr>
-              <tr>
-                <th>Beschreibung:</th>
-                <td><textarea class="form-control" formControlName="description"
-                              placeholder="{{activeOil?.description}}" rows="4"
-                              cols="23" ngModel="{{activeOil?.description}}"></textarea></td>
-              </tr>
-              <tr>
-                <th>Preis:</th>
-                <td>
-                  <div class="input-group">
-                    <input type="number" class="form-control" formControlName="price"
-                           placeholder="{{activeOil?.price}}"
-                           ngModel="{{activeOil?.price}}"
-                           step=".01">
-                    <div class="input-group-append">
-                      <span class="input-group-text">€</span>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th>Nettovolumen:</th>
-                <td>
-                  <div class="input-group">
-                    <input type="number" class="form-control" formControlName="bottle_size"
-                           placeholder="{{activeOil?.bottle_size}}"
-                           ngModel="{{activeOil?.bottle_size}}">
-                    <div class="input-group-append">
-                      <span class="input-group-text">ml</span>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th>Herkunftsland:</th>
-                <td><input type="text" class="form-control" formControlName="origin"
-                           placeholder="{{activeOil?.origin}}"
-                           ngModel="{{activeOil?.origin}}"></td>
-              </tr>
-              <tr>
-                <th>Artikel auf Lager?</th>
-                <td><input type="checkbox" class="form-check-input" formControlName="availability"
-                           [ngModel]="activeOil?.availability"></td>
-              </tr>
-              <tr>
-                <th>Inhaltsstoffe:</th>
-                <td>
-                  <div>
-                    <input type="text" class="form-control" formControlName="newIngredient"
-                           [(ngModel)]="newIngredient">
-                    <button type="button" class="ingredientBtn btn btn-outline-success" title="Inhaltsstoff hinzufügen"
-                            (click)="addIngredient();">+
-                    </button>
-                    <button type="button" class="ingredientBtn btn btn-outline-danger" title="Letzten Inhaltsstoff löschen"
-                            (click)="deleteIngredient();">-
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th></th>
-                <td>
-                  <a id="ingredientListShow">{{ingredientList.join(', ')}}</a>
-                </td>
-              </tr>
-            </table>
-            <hr/>
-            <table class="buttonTable">
-              <tr>
-                <td>
-                  <button class="btn btn-success" type="submit" data-bs-dismiss="modal" title="Speichern"><i class="bi bi-floppy-fill"></i>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-secondary" type="reset" title="Formular leeren" (click)="ingredientList = [];"><i
-                    class="bi bi-trash-fill"></i></button>
-                </td>
-                <td>
-                  <button class="btn btn-danger" type="reset" title="Abbrechen" (click)="setEditingModeActive(false)"><i
-                    class="bi bi-x-lg"></i></button>
-                </td>
-              </tr>
-            </table>
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
 </div>
+
+<!-- Menü -->
+<div class="dropdown">
+    <button class="btn btn-dark menuBtn" type="button" id="dropdownMenu" data-bs-toggle="dropdown">
+        <i class="bi bi-three-dots-vertical"></i>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-dark menuItems" aria-labelledby="dropdownMenu">
+        <li>
+            <a class="nav-link active" aria-current="page" routerLink="/oil/create-oil">
+                <button class="dropdown-item" type="button">
+                    <i class="bi bi-plus-lg"></i> Öl hinzufügen
+                </button>
+            </a>
+        </li>
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+        <li>
+            <button class="dropdown-item" type="button">
+                <i class="bi bi-download"></i> Öl-Übersicht herunterladen
+            </button>
+        </li>
+    </ul>
+</div>
+
+<!-- Detail-Popup -->
+<div class="modal fade" tabindex="-1" role="dialog" id="detailView" data-bs-backdrop="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{activeOil?.name}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        (click)="setEditingModeActive(false)"></button>
+            </div>
+            <div class="modal-body">
+                <div id="oilCarousel" class="carousel slide">
+                    <div class="carousel-indicators">
+                        <button *ngFor="let picture of activeOil?.pictures; let i = index"
+                                type="button" data-bs-target="#oilCarousel" [attr.data-bs-slide-to]="i"
+                                [ngClass]="{'active': i===0}"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div *ngFor="let picture of activeOil?.pictures; let i = index"
+                             class="carousel-item" [ngClass]="{'active': i===0}">
+                            <img [src]="picture" class="d-block w-100">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#oilCarousel"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#oilCarousel"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+                <br>
+                <p [hidden]="isEditingModeActive">{{activeOil?.description}}</p>
+
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-secondary"
+                                [disabled]="isEditingModeActive"
+                                (click)="setEditingModeActive(true)">Bearbeiten
+                        </button>
+                    </div>
+                    <div class="col-6 priceDisplay" [hidden]="isEditingModeActive">
+                        <h5>€ {{activeOil?.price}}</h5>
+                    </div>
+                </div>
+
+                <hr/>
+                <h5>Produktdetails <a *ngIf="isEditingModeActive">bearbeiten</a>:</h5>
+                <table class="table oilDetails" *ngIf="!isEditingModeActive">
+                    <tr>
+                        <th>Inhaltsstoffe:</th>
+                        <td>{{activeOil?.ingredients?.join(', ')}}</td>
+                    </tr>
+                    <tr>
+                        <th>Nettovolumen:</th>
+                        <td>{{activeOil?.bottle_size}} ml</td>
+                    </tr>
+                    <tr>
+                        <th>Herkunftsland:</th>
+                        <td>{{activeOil?.origin}}</td>
+                    </tr>
+                </table>
+
+                <div *ngIf="isEditingModeActive">
+                    <div *ngIf="editForm.invalid">
+                        <!--NAME-->
+                        <div *ngIf="editForm.get('name')?.hasError('nameNullError')"
+                             class="alert alert-danger">{{editForm.getError('nameNullError', 'name')}}</div>
+                        <div *ngIf="editForm.get('name')?.hasError('nameLengthError')"
+                             class="alert alert-danger">{{editForm.getError('nameLengthError', 'name')}}</div>
+
+                        <!--DESCRIPTION-->
+                        <div *ngIf="editForm.get('description')?.hasError('descriptionNullError')"
+                             class="alert alert-danger">{{editForm.getError('descriptionNullError', 'description')}}</div>
+                        <div *ngIf="editForm.get('description')?.hasError('descriptionLengthError')"
+                             class="alert alert-danger">{{editForm.getError('descriptionLengthError', 'description')}}</div>
+
+                        <!--PRICE-->
+                        <div *ngIf="editForm.get('price')?.hasError('priceNotPositiveError')"
+                             class="alert alert-danger">{{editForm.getError('priceNotPositiveError', 'price')}}</div>
+
+                        <!--BOTTLESIZE-->
+                        <div *ngIf="editForm.get('bottle_size')?.hasError('bottleSizeNotPositiveError')"
+                             class="alert alert-danger">{{editForm.getError('bottleSizeNotPositiveError', 'bottle_size')}}</div>
+                        <div *ngIf="editForm.get('bottle_size')?.hasError('bottleSizeVolumeError')"
+                             class="alert alert-danger">{{editForm.getError('bottleSizeVolumeError', 'bottle_size')}}</div>
+
+                        <!--INGREDIENT-->
+                        <div *ngIf="editForm.get('newIngredient')?.dirty && editForm.get('newIngredient')?.hasError('ingredientLengthError')"
+                             class="alert alert-danger">{{editForm.getError('ingredientLengthError', 'newIngredient')}}</div>
+
+                        <!--INGREDIENT-LIST-->
+                        <div *ngIf="oilService.ingredientList.length<1 && editForm.get('ingredientList')?.hasError('ingredientListNullError')"
+                             class="alert alert-danger">{{editForm.getError('ingredientListNullError', 'ingredientList')}}</div>
+
+
+                    </div>
+
+                    <form class="form-group" [formGroup]="editForm" (ngSubmit)="updateOil(activeOil)">
+                        <table class="table oilDetails">
+                            <tr>
+                                <th>Name:</th>
+                                <td><input type="text" class="form-control" formControlName="name"
+                                           placeholder="{{activeOil?.name}}"
+                                           ngModel="{{activeOil?.name}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Beschreibung:</th>
+                                <td><textarea class="form-control" formControlName="description"
+                                              placeholder="{{activeOil?.description}}" rows="4"
+                                              cols="23" ngModel="{{activeOil?.description}}"></textarea></td>
+                            </tr>
+                            <tr>
+                                <th>Preis:</th>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" formControlName="price"
+                                               placeholder="{{activeOil?.price}}"
+                                               ngModel="{{activeOil?.price}}"
+                                               step=".01">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">€</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Nettovolumen:</th>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" formControlName="bottle_size"
+                                               placeholder="{{activeOil?.bottle_size}}"
+                                               ngModel="{{activeOil?.bottle_size}}">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">ml</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Herkunftsland:</th>
+                                <td><input type="text" class="form-control" formControlName="origin"
+                                           placeholder="{{activeOil?.origin}}"
+                                           ngModel="{{activeOil?.origin}}"></td>
+                            </tr>
+                            <tr>
+                                <th>Artikel auf Lager?</th>
+                                <td><input type="checkbox" class="form-check-input" formControlName="availability"
+                                           [ngModel]="activeOil?.availability"></td>
+                            </tr>
+                            <tr>
+                                <th>Inhaltsstoffe:</th>
+                                <td>
+                                    <div>
+                                        <input type="text" class="form-control" formControlName="newIngredient"
+                                               [(ngModel)]="oilService.newIngredient">
+                                        <button type="button" class="ingredientBtn btn btn-outline-success"
+                                                title="Inhaltsstoff hinzufügen"
+                                                (click)="addIngredient();">+
+                                        </button>
+                                        <button type="button" class="ingredientBtn btn btn-outline-danger"
+                                                title="Letzten Inhaltsstoff löschen"
+                                                (click)="deleteIngredient();">-
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <a id="ingredientListShow">{{oilService.ingredientList.join(', ')}}</a>
+                                </td>
+                            </tr>
+                        </table>
+                        <hr/>
+                        <table class="buttonTable">
+                            <tr>
+                                <td>
+                                    <button class="btn btn-success" type="submit" data-bs-dismiss="modal"
+                                            title="Speichern"><i class="bi bi-floppy-fill"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-secondary" type="reset" title="Formular leeren"
+                                            (click)="oilService.ingredientList = [];"><i
+                                            class="bi bi-eraser-fill"></i></button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" type="reset" title="Abbrechen"
+                                            (click)="setEditingModeActive(false)"><i
+                                            class="bi bi-x-lg"></i></button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

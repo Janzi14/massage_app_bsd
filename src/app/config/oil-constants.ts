@@ -21,6 +21,8 @@ export const ERROR_MESSAGES: { [key: string]: string } = {
 
 export const CRUD_MESSAGE: {[key: string]: string} = {
   //Create
+  'createDataSuccess': 'Öl erfolgreich erstellt.',
+  'createDataError': 'Fehler beim Erstellen des Öls.',
 
   //Read
   'readDataSuccess': 'Lesen der Öle erfolgreich: ',

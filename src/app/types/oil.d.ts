@@ -1,5 +1,5 @@
 interface Oil{
-  id: number,
+  id: string,
   name: string,
   description: string,
   ingredients: string[],

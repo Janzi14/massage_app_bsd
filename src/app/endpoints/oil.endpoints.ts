@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {AbstractControl} from "@angular/forms";
+import {isNewIngredientAllowed} from "../validators/oil-validator";
 
 @Injectable({
   providedIn: 'root',
@@ -9,10 +10,15 @@ import {AbstractControl} from "@angular/forms";
 export class OilService {
   private dataUrl = 'http://localhost:3000/oil';
 
+  ingredientList: string[] = [];
+  newIngredient: string = "";
+
   constructor(private http: HttpClient) {}
 
   //CREATE
-  //TODO
+  createOil(oil: Oil){
+    return this.http.post(this.dataUrl, oil);
+  }
 
   //READ
   getOils(): Observable<Oil[]> {
@@ -38,4 +44,19 @@ export class OilService {
 
   //DELETE
   //TODO
+
+
+  //Helper
+  addIngredient(): void {
+    if (isNewIngredientAllowed(this.newIngredient)) {
+      this.ingredientList.push(this.newIngredient);
+      this.newIngredient = '';
+    }
+  }
+
+  deleteIngredient(): void {
+    if (this.ingredientList != null) {
+      this.ingredientList.pop();
+    }
+  }
 }
