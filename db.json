@@ -35,7 +35,7 @@
   ],
   "oil": [
     {
-      "id": 1,
+      "id": "ca5e44cb-1c80-4610-bb3f-d7bc2be5baa1",
       "name": "Lavendelöl",
       "description": "Dieses Massageöl bietet eine entspannende Erfahrung mit dem beruhigenden Duft von Lavendel. Ideal für Stressabbau und Entspannung.",
       "ingredients": ["Mandelöl", "Lavendelöl", "Vitamin E"],
@@ -46,7 +46,7 @@
       "pictures": ["./assets/oil/lavender1.png", "./assets/oil/lavender2.png"]
     },
     {
-      "id": 2,
+      "id": "2680f9d9-de5d-4f1e-a051-f54492188c9b",
       "name": "Eukalyptusöl",
       "description": "Ein belebendes Massageöl mit dem erfrischenden Duft von Eukalyptus. Perfekt, um neue Energie zu tanken und die Sinne zu beleben.",
       "ingredients": ["Jojobaöl", "Eukalyptusöl", "Minzöl", "Vitamin C"],
@@ -57,7 +57,7 @@
       "pictures": ["./assets/oil/eucalyptus1.png", "./assets/oil/eucalyptus2.png"]
     },
     {
-      "id": 3,
+      "id": "d6f45c6d-2746-4640-b311-c7e192ff03c4",
       "name": "Kokosnussöl",
       "description": "Dieses Massageöl vereint die Exotik der Tropen mit einem verführerischen Hauch von Kokosnuss. Feuchtigkeitsspendend und revitalisierend.",
       "ingredients": ["Kokosöl", "Arganöl", "Vitamin A", "Vitamin E"],
@@ -68,7 +68,7 @@
       "pictures": ["./assets/oil/coconut1.png", "./assets/oil/coconut2.png", "./assets/oil/coconut3.png"]
     },
     {
-      "id": 4,
+      "id": "0504c99f-5566-46ac-b6e2-913beb782933",
       "name": "Zitrusfrisches Orangenöl",
       "description": "Erfrischendes Massageöl mit dem belebenden Duft von Orangen. Ideal, um neue Energie zu tanken und die Haut zu revitalisieren.",
       "ingredients": ["Traubenkernöl", "Orangenöl", "Zitronenöl", "Vitamin C"],
