@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {OilService} from "../../endpoints/oil.endpoints";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import * as Constants from "../../config/oil-constants";
 import {
   getErrorMsg, isNewIngredientAllowed,
   validateBottleSize,
@@ -31,32 +32,47 @@ export class OilComponent {
   newIngredient: string = "";
 
   editForm = this.formBuilder.group({
-    inputName: new FormControl('', [Validators.required, validateName]),
-    inputDescription: new FormControl('', [Validators.required, validateDescription]),
-    inputPrice: new FormControl('', [Validators.required, validatePrice]),
-    inputBottleSize: new FormControl('', [Validators.required, validateBottleSize]),
-    inputOrigin: ['', Validators.required /*TODO: Autocomplete API*/],
-    inputAvailability: false,
-    inputIngredients: new FormControl('', [validateNewIngredient]),
-    ingredientList: new FormControl('', [Validators.required, validateIngredientList])
+    name: new FormControl('', [Validators.required, validateName]),
+    description: new FormControl('', [Validators.required, validateDescription]),
+    price: new FormControl(0, [Validators.required, validatePrice]),
+    bottle_size: new FormControl(0, [Validators.required, validateBottleSize]),
+    origin: new FormControl('', [Validators.required /*TODO: Autocomplete API*/]),
+    availability: false,
+    newIngredient: new FormControl('', [validateNewIngredient]),
+    ingredientList: new FormControl(this.ingredientList, [validateIngredientList])
   });
 
   constructor(private oilService: OilService, private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
+    this.getOils();
+  }
+
+  getOils() {
     this.oilService.getOils().subscribe(data => {
-      console.log(data);
+      console.log(Constants.CRUD_MESSAGE['readDataSuccess'], data);
       this.oils = data
     });
   }
 
   updateOil(oil: Oil): void {
-    // if (oil != null) {
-    //   this.oilService.updateOil(oil);
-    // }
+    this.editForm.get('ingredientList')?.setValue(this.ingredientList);
 
-    console.log("submit...", this.editForm.value, this.editForm.invalid);
+    if (this.editForm.valid) {
+      this.oilService.updateOil(oil, this.editForm.value).subscribe({
+        next: () => {
+          this.getOils();
+          this.setEditingModeActive(false);
+          this.activeOil = {} as Oil;
+
+          console.log(Constants.CRUD_MESSAGE['updateDataSuccess'], );
+        },
+        error: error => {
+          console.log(Constants.CRUD_MESSAGE['updateDataError'], error)
+        }
+      });
+    }
   }
 
   setActiveOil(oil: Oil): void {
@@ -77,7 +93,7 @@ export class OilComponent {
   }
 
   deleteIngredient(): void {
-    if(this.ingredientList != null){
+    if (this.ingredientList != null) {
       this.ingredientList.pop();
     }
   }

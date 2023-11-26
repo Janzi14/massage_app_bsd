@@ -86,36 +86,34 @@
         <div *ngIf="isEditingModeActive">
           <div *ngIf="editForm.invalid">
             <!--NAME-->
-            <div *ngIf="editForm.get('inputName')?.hasError('nameNullError')"
-                 class="alert alert-danger">{{editForm.getError('nameNullError', 'inputName')}}</div>
-            <div *ngIf="editForm.get('inputName')?.hasError('nameLengthError')"
-                 class="alert alert-danger">{{editForm.getError('nameLengthError', 'inputName')}}</div>
+            <div *ngIf="editForm.get('name')?.hasError('nameNullError')"
+                 class="alert alert-danger">{{editForm.getError('nameNullError', 'name')}}</div>
+            <div *ngIf="editForm.get('name')?.hasError('nameLengthError')"
+                 class="alert alert-danger">{{editForm.getError('nameLengthError', 'name')}}</div>
 
             <!--DESCRIPTION-->
-            <div *ngIf="editForm.get('inputDescription')?.hasError('descriptionNullError')"
-                 class="alert alert-danger">{{editForm.getError('descriptionNullError', 'inputDescription')}}</div>
-            <div *ngIf="editForm.get('inputDescription')?.hasError('descriptionLengthError')"
-                 class="alert alert-danger">{{editForm.getError('descriptionLengthError', 'inputDescription')}}</div>
+            <div *ngIf="editForm.get('description')?.hasError('descriptionNullError')"
+                 class="alert alert-danger">{{editForm.getError('descriptionNullError', 'description')}}</div>
+            <div *ngIf="editForm.get('description')?.hasError('descriptionLengthError')"
+                 class="alert alert-danger">{{editForm.getError('descriptionLengthError', 'description')}}</div>
 
             <!--PRICE-->
-            <div *ngIf="editForm.get('inputPrice')?.hasError('priceNotPositiveError')"
-                 class="alert alert-danger">{{editForm.getError('priceNotPositiveError', 'inputPrice')}}</div>
+            <div *ngIf="editForm.get('price')?.hasError('priceNotPositiveError')"
+                 class="alert alert-danger">{{editForm.getError('priceNotPositiveError', 'price')}}</div>
 
             <!--BOTTLESIZE-->
-            <div *ngIf="editForm.get('inputBottleSize')?.hasError('bottleSizeNotPositiveError')"
-                 class="alert alert-danger">{{editForm.getError('bottleSizeNotPositiveError', 'inputBottleSize')}}</div>
-            <div *ngIf="editForm.get('inputBottleSize')?.hasError('bottleSizeVolumeError')"
-                 class="alert alert-danger">{{editForm.getError('bottleSizeVolumeError', 'inputBottleSize')}}</div>
+            <div *ngIf="editForm.get('bottle_size')?.hasError('bottleSizeNotPositiveError')"
+                 class="alert alert-danger">{{editForm.getError('bottleSizeNotPositiveError', 'bottle_size')}}</div>
+            <div *ngIf="editForm.get('bottle_size')?.hasError('bottleSizeVolumeError')"
+                 class="alert alert-danger">{{editForm.getError('bottleSizeVolumeError', 'bottle_size')}}</div>
 
             <!--INGREDIENT-->
             <div
-              *ngIf="editForm.get('inputIngredients')?.dirty && editForm.get('inputIngredients')?.hasError('ingredientLengthError')"
-              class="alert alert-danger">{{editForm.getError('ingredientLengthError', 'inputIngredients')}}</div>
+              *ngIf="editForm.get('newIngredient')?.dirty && editForm.get('newIngredient')?.hasError('ingredientLengthError')"
+              class="alert alert-danger">{{editForm.getError('ingredientLengthError', 'newIngredient')}}</div>
             <!--INGREDIENT-LIST-->
             <div *ngIf="ingredientList.length<1 && editForm.get('ingredientList')?.hasError('ingredientListNullError')"
                  class="alert alert-danger">{{editForm.getError('ingredientListNullError', 'ingredientList')}}</div>
-            <div *ngIf="editForm.get('ingredientList')?.hasError('ingredientListLengthError')"
-                 class="alert alert-danger">{{editForm.getError('ingredientListLengthError', 'ingredientList')}}</div>
 
 
           </div>
@@ -124,14 +122,14 @@
             <table class="table oilDetails">
               <tr>
                 <th>Name:</th>
-                <td><input type="text" class="form-control" formControlName="inputName"
+                <td><input type="text" class="form-control" formControlName="name"
                            placeholder="{{activeOil?.name}}"
                            ngModel="{{activeOil?.name}}">
                 </td>
               </tr>
               <tr>
                 <th>Beschreibung:</th>
-                <td><textarea class="form-control" formControlName="inputDescription"
+                <td><textarea class="form-control" formControlName="description"
                               placeholder="{{activeOil?.description}}" rows="4"
                               cols="23" ngModel="{{activeOil?.description}}"></textarea></td>
               </tr>
@@ -139,7 +137,7 @@
                 <th>Preis:</th>
                 <td>
                   <div class="input-group">
-                    <input type="number" class="form-control" formControlName="inputPrice"
+                    <input type="number" class="form-control" formControlName="price"
                            placeholder="{{activeOil?.price}}"
                            ngModel="{{activeOil?.price}}"
                            step=".01">
@@ -153,7 +151,7 @@
                 <th>Nettovolumen:</th>
                 <td>
                   <div class="input-group">
-                    <input type="number" class="form-control" formControlName="inputBottleSize"
+                    <input type="number" class="form-control" formControlName="bottle_size"
                            placeholder="{{activeOil?.bottle_size}}"
                            ngModel="{{activeOil?.bottle_size}}">
                     <div class="input-group-append">
@@ -164,25 +162,25 @@
               </tr>
               <tr>
                 <th>Herkunftsland:</th>
-                <td><input type="text" class="form-control" formControlName="inputOrigin"
+                <td><input type="text" class="form-control" formControlName="origin"
                            placeholder="{{activeOil?.origin}}"
                            ngModel="{{activeOil?.origin}}"></td>
               </tr>
               <tr>
                 <th>Artikel auf Lager?</th>
-                <td><input type="checkbox" class="form-check-input" formControlName="inputAvailability"
+                <td><input type="checkbox" class="form-check-input" formControlName="availability"
                            [ngModel]="activeOil?.availability"></td>
               </tr>
               <tr>
                 <th>Inhaltsstoffe:</th>
                 <td>
                   <div>
-                    <input type="text" class="form-control" formControlName="inputIngredients"
+                    <input type="text" class="form-control" formControlName="newIngredient"
                            [(ngModel)]="newIngredient">
-                    <button class="ingredientBtn btn btn-outline-success" title="Inhaltsstoff hinzufügen"
+                    <button type="button" class="ingredientBtn btn btn-outline-success" title="Inhaltsstoff hinzufügen"
                             (click)="addIngredient();">+
                     </button>
-                    <button class="ingredientBtn btn btn-outline-danger" title="Letzten Inhaltsstoff löschen"
+                    <button type="button" class="ingredientBtn btn btn-outline-danger" title="Letzten Inhaltsstoff löschen"
                             (click)="deleteIngredient();">-
                     </button>
                   </div>
@@ -203,7 +201,7 @@
             <table class="buttonTable">
               <tr>
                 <td>
-                  <button class="btn btn-success" type="submit" title="Speichern"><i class="bi bi-floppy-fill"></i>
+                  <button class="btn btn-success" type="submit" data-bs-dismiss="modal" title="Speichern"><i class="bi bi-floppy-fill"></i>
                   </button>
                 </td>
                 <td>
