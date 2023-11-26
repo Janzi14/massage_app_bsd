@@ -43,7 +43,9 @@ export class OilService {
   }
 
   //DELETE
-  //TODO
+  deleteOil(oil: Oil): Observable<any>{
+    return this.http.delete(this.dataUrl+"/"+oil.id);
+  }
 
 
   //Helper

@@ -29,7 +29,10 @@ export const CRUD_MESSAGE: {[key: string]: string} = {
 
   //Update
   'updateDataSuccess': 'Öl erfolgreich geupdatet.',
-  'updateDataError': 'Fehler beim Aktualisieren des Öls.'
+  'updateDataError': 'Fehler beim Aktualisieren des Öls.',
 
   //Delete
+  'deleteDataSuccess': 'Öl erfolgreich gelöscht.',
+  'deleteDataError': 'Fehler beim Löschen des Öls.',
+  'deleteConfirm': 'Möchten Sie \'[...]\' wirklich löschen?'
 };

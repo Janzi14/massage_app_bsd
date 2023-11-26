@@ -48,7 +48,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">{{activeOil?.name}}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                <button type="button" class="btn-close" #closeModalBtn data-bs-dismiss="modal"
                         (click)="setEditingModeActive(false)"></button>
             </div>
             <div class="modal-body">
@@ -80,12 +80,18 @@
                 <p [hidden]="isEditingModeActive">{{activeOil?.description}}</p>
 
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-3">
                         <button type="button" class="btn btn-secondary"
                                 [disabled]="isEditingModeActive"
                                 (click)="setEditingModeActive(true)">Bearbeiten
                         </button>
                     </div>
+                    <div class="col-3">
+                        <button class="btn btn-danger delete-btn" type="button" data-bs-dismiss="modal"
+                                [hidden]="!isEditingModeActive" (click)="deleteOil(activeOil); ">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+                </div>
                     <div class="col-6 priceDisplay" [hidden]="isEditingModeActive">
                         <h5>€ {{activeOil?.price}}</h5>
                     </div>

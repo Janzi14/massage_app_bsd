@@ -52,11 +52,8 @@ export class CreateOilComponent {
     }
 
     createOil(): void {
-        // this.editForm.get('ingredientList')?.setValue(this.oilService.ingredientList);
-
-        if (this.addForm != undefined) {
-
-            const newOil = this.checkAndCreateOilObject();
+        if (this.addForm != undefined && this.addForm.valid) {
+            const newOil = this.createOilObject();
 
             if (newOil != undefined || newOil != null) {
                 this.oilService.createOil(newOil).subscribe({
@@ -88,7 +85,7 @@ export class CreateOilComponent {
         this.oilService.deleteIngredient();
     }
 
-    private checkAndCreateOilObject(): Oil {
+    private createOilObject(): Oil {
         this.addForm.get('ingredientList')?.setValue(this.oilService.ingredientList);
 
         const ingredientListBackup = this.addForm.value.ingredientList;
@@ -108,7 +105,7 @@ export class CreateOilComponent {
                 price: parseFloat(this.addForm.value.price),
                 availability: this.addForm.value.availability,
                 origin: this.addForm.value.origin,
-                pictures: ["picture1.jpg", "picture2.jpg"]
+                pictures: ["picture1.jpg", "picture2.jpg" /*TODO File Input/Upload*/]
             }
         } else {
             this.addForm.markAllAsTouched(); //trigger validator

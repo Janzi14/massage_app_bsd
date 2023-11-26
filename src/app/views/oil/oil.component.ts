@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {OilService} from "../../endpoints/oil.endpoints";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -9,7 +9,7 @@ import {
     validateName, validateNewIngredient,
     validatePrice
 } from "../../validators/oil-validator";
-import {RouterLink, RouterOutlet} from "@angular/router";
+import {RouterLink} from "@angular/router";
 import {CreateOilComponent} from "./create-oil/create-oil.component";
 
 @Component({
@@ -23,8 +23,7 @@ import {CreateOilComponent} from "./create-oil/create-oil.component";
         ReactiveFormsModule,
         FormsModule,
         RouterLink,
-        CreateOilComponent,
-        RouterOutlet
+        CreateOilComponent
     ],
     standalone: true
 })
@@ -72,7 +71,7 @@ export class OilComponent {
                     this.setEditingModeActive(false);
                     this.activeOil = {} as Oil;
 
-                    console.log(Constants.CRUD_MESSAGE['updateDataSuccess'],);
+                    console.log(Constants.CRUD_MESSAGE['updateDataSuccess']);
                 },
                 error: error => {
                     console.log(Constants.CRUD_MESSAGE['updateDataError'], error)
@@ -80,6 +79,24 @@ export class OilComponent {
             });
         }
         console.log(Constants.CRUD_MESSAGE['updateDataError'])
+    }
+
+    deleteOil(oil: Oil): void {
+        if(confirm(Constants.CRUD_MESSAGE['deleteConfirm'].replace("[...]", oil.name))){
+            this.oilService.deleteOil(oil).subscribe({
+                next: () => {
+                    this.getOils();
+                    this.setEditingModeActive(false);
+                    this.activeOil = {} as Oil;
+
+                    console.log(Constants.CRUD_MESSAGE['deleteDataSuccess']);
+                },
+                error: error => {
+                    console.log(Constants.CRUD_MESSAGE['deleteDataError'], error)
+                }
+            });
+            console.log(Constants.CRUD_MESSAGE['deleteDataError']);
+        }
     }
 
     setActiveOil(oil: Oil): void {
