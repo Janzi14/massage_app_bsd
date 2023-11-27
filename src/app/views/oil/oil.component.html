@@ -1,7 +1,7 @@
 <!-- Allgemeine Oel-Ansicht -->
 <div class="container mt-4">
     <div class="row">
-        <div class="col-6 col-sm-3" *ngFor="let oil of oils" data-bs-toggle="modal" data-bs-target="#detailView"
+        <div class="col-6 col-sm-3" *ngFor="let oil of filteredOils" data-bs-toggle="modal" data-bs-target="#detailView"
              (click)="setActiveOil(oil)">
             <div class="card h-100">
                 <img src="{{oil.pictures[0]}}" class="card-img-top" alt="Produktbild: {{oil.name}}">
@@ -14,6 +14,16 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Search-Bar -->
+<div class="searchbar">
+    <div class="row">
+        <div class="col-6 col-sm-3">
+            <input type="text" class="form-control" placeholder="Suche..."
+                   [(ngModel)]="searchTerm" (input)="filterOils()">
         </div>
     </div>
 </div>
@@ -91,7 +101,7 @@
                                 [hidden]="!isEditingModeActive" (click)="deleteOil(activeOil); ">
                             <i class="bi bi-trash-fill"></i>
                         </button>
-                </div>
+                    </div>
                     <div class="col-6 priceDisplay" [hidden]="isEditingModeActive">
                         <h5>€ {{activeOil?.price}}</h5>
                     </div>

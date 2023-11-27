@@ -52,6 +52,8 @@ export class CreateOilComponent {
     }
 
     createOil(): void {
+        console.log(this.addForm.value.ingredientList);
+
         if (this.addForm != undefined && this.addForm.valid) {
             const newOil = this.createOilObject();
 
@@ -86,6 +88,8 @@ export class CreateOilComponent {
     }
 
     private createOilObject(): Oil {
+        console.log(this.oilService.ingredientList);
+
         this.addForm.get('ingredientList')?.setValue(this.oilService.ingredientList);
 
         const ingredientListBackup = this.addForm.value.ingredientList;

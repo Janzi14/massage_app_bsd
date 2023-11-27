@@ -45,8 +45,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-sm-9" *ngIf="isAddingModeActive">
-            <h1>Neuen Öl-Eintrag erstellen</h1>
+        <div class="col-6 col-sm-6" *ngIf="isAddingModeActive">
+            <h5>Neuen Öl-Eintrag erstellen</h5>
             <hr>
 
             <form class="form-group" [formGroup]="addForm" (ngSubmit)="createOil()">

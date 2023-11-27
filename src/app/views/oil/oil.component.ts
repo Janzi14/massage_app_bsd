@@ -32,6 +32,8 @@ export class OilComponent {
     activeOil = {} as Oil;
     isEditingModeActive: boolean = false;
     oilService: OilService;
+    filteredOils: Oil[] = [];
+    searchTerm: string = '';
 
     editForm: FormGroup;
 
@@ -58,6 +60,7 @@ export class OilComponent {
         this.oilService.getOils().subscribe(data => {
             console.log(Constants.CRUD_MESSAGE['readDataSuccess'], data);
             this.oils = data
+            this.filteredOils = [...this.oils];
         });
     }
 
@@ -114,5 +117,12 @@ export class OilComponent {
 
     deleteIngredient(): void {
         this.oilService.deleteIngredient();
+    }
+
+    filterOils(): void {
+        this.filteredOils = this.oils.filter(oil =>
+            oil.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+            oil.description.toLowerCase().includes(this.searchTerm.toLowerCase())
+        );
     }
 }
