@@ -139,19 +139,35 @@ export class OilComponent {
         );
     }
 
-    async printOils() {
-        let elementToPrint = document.getElementById('printElements');
+    async printOils(isDetailView: boolean) {
+        let elementToPrint: HTMLElement | null;
+        let fileName: string;
+        if (isDetailView) {
+            elementToPrint = document.getElementById('printDetail');
+            fileName = 'oel_detail_uebersicht_' +
+                this.activeOil?.name.toLowerCase()
+                    .replaceAll("[:\\\\/*?|<>]", "")
+                + '.pdf';
+        } else {
+            elementToPrint = document.getElementById('printOverview');
+            fileName = 'oel_detail_uebersicht_gesamt.pdf';
+        }
 
         if (elementToPrint) {
-            const pdf = await html2PDF(elementToPrint, {
+            await html2PDF(elementToPrint, {
                 jsPDF: {
                     format: 'a4',
                 },
-                imageType: 'image/jpeg',
-                output: './pdf/generate.pdf'
+                imageType: 'image/png',
+                output: fileName,
+                success: function (pdf) {
+                    pdf.save(fileName);
+                }
             });
+
+            console.log('PDF wurde erstellt.');
         } else {
-            console.error('Element mit ID "printElements" nicht gefunden.');
+            console.log('Element mit angegebener ID nicht gefunden.');
         }
 
     }
