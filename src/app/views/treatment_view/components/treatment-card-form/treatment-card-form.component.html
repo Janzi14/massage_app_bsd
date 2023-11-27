@@ -1,0 +1,33 @@
+<div class="bg-body-secondary">
+  <div class="card-header text-success">Bearbeiten</div>
+  <form (submit)="onSubmit()" [formGroup]="form" class="list-group list-group-flush">
+    <div>{{form.errors}}</div>
+    <label>Name:</label>
+    <input formControlName="name" required type="text"/>
+
+    <label>Beschreiben:</label>
+    <input formControlName="description" required type="text"/>
+
+    <label>Preis (€/Stunde):</label>
+    <input formControlName="price_in_euro" required type="number"/>
+
+    <label>Körperteil:</label>
+    <input formControlName="body_part" required type="text"/>
+
+    <label>Verfügbar:</label>
+    <input formControlName="available" type="checkbox"/>
+
+    <div *ngFor="let name of Object.keys(form.controls)">
+      <div *ngIf="!form.get(name)?.pristine && !form.get(name)?.valid" class="alert alert-danger">
+        {{form.get(name)?.getError("range").message}}</div>
+    </div>
+
+    <div class="list-group-item d-flex justify-content-evenly bg-body-secondary">
+      <button (click)="onCancel()" class="btn btn-outline-danger rounded-circle" type="button"><i
+        class="bi bi-x-lg"></i></button>
+      <button [disabled]="!form.valid" class="btn btn-outline-success rounded-circle" type="submit"><i
+        class="bi bi-floppy"></i></button>
+
+    </div>
+  </form>
+</div>

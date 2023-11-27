@@ -1,0 +1,22 @@
+<div class="d-flex flex-column gap-4 mx-auto details-view">
+  <div class="text-center mt-5" id="details-view">
+    <h1 class="card-header text-success pb-2">
+      {{treatment?.name}}
+    </h1>
+    <ul class="list-group list-group-flush h3">
+      <li class="list-group-item text-secondary">{{treatment?.description}}</li>
+      <li class="list-group-item text-secondary">{{treatment?.price_in_euro}}€/Stunde</li>
+      <li class="list-group-item text-secondary">{{treatment?.body_part}}</li>
+      <li [class]="treatment?.available?'bg-success': 'bg-danger'"
+          class="list-group-item text-white">{{treatment?.available ? "Verfügbar" : "Nicht verfügbar"}}
+      </li>
+    </ul>
+  </div>
+
+  <button (click)="readContentOutLoud()" class="btn btn-outline-success" type="button">
+    <i class="bi bi-ear"></i> Details vorlesen lassen
+  </button>
+  <button class="btn btn-outline-secondary" routerLink="/treatments" type="button">
+    <h2>zurück zur Übersicht</h2>
+  </button>
+</div>
