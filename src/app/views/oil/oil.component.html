@@ -164,15 +164,14 @@
                             <tr>
                                 <th>Name:</th>
                                 <td><input type="text" class="form-control" formControlName="name"
-                                           placeholder="{{activeOil?.name}}"
-                                           ngModel="{{activeOil?.name}}">
+                                           placeholder="{{activeOil?.name}}">
                                 </td>
                             </tr>
                             <tr>
                                 <th>Beschreibung:</th>
                                 <td><textarea class="form-control" formControlName="description"
                                               placeholder="{{activeOil?.description}}" rows="4"
-                                              cols="23" ngModel="{{activeOil?.description}}"></textarea></td>
+                                              cols="23"></textarea></td>
                             </tr>
                             <tr>
                                 <th>Preis:</th>
@@ -180,7 +179,6 @@
                                     <div class="input-group">
                                         <input type="number" class="form-control" formControlName="price"
                                                placeholder="{{activeOil?.price}}"
-                                               ngModel="{{activeOil?.price}}"
                                                step=".01">
                                         <div class="input-group-append">
                                             <span class="input-group-text">€</span>
@@ -193,8 +191,7 @@
                                 <td>
                                     <div class="input-group">
                                         <input type="number" class="form-control" formControlName="bottle_size"
-                                               placeholder="{{activeOil?.bottle_size}}"
-                                               ngModel="{{activeOil?.bottle_size}}">
+                                               placeholder="{{activeOil?.bottle_size}}">
                                         <div class="input-group-append">
                                             <span class="input-group-text">ml</span>
                                         </div>
@@ -204,23 +201,20 @@
                             <tr>
                                 <th>Herkunftsland:</th>
                                 <td><input type="text" class="form-control" formControlName="origin"
-                                           placeholder="{{activeOil?.origin}}"
-                                           ngModel="{{activeOil?.origin}}"></td>
+                                           placeholder="{{activeOil?.origin}}"></td>
                             </tr>
                             <tr>
                                 <th>Artikel auf Lager?</th>
-                                <td><input type="checkbox" class="form-check-input" formControlName="availability"
-                                           [ngModel]="activeOil?.availability"></td>
+                                <td><input type="checkbox" class="form-check-input" formControlName="availability"></td>
                             </tr>
                             <tr>
                                 <th>Inhaltsstoffe:</th>
                                 <td>
                                     <div>
-                                        <input type="text" class="form-control" formControlName="newIngredient"
-                                               [(ngModel)]="oilService.newIngredient">
+                                        <input type="text" class="form-control" formControlName="newIngredient">
                                         <button type="button" class="ingredientBtn btn btn-outline-success"
                                                 title="Inhaltsstoff hinzufügen"
-                                                (click)="addIngredient();">+
+                                                (click)="this.oilService.newIngredient = editForm.get('newIngredient')?.value; addIngredient();">+
                                         </button>
                                         <button type="button" class="ingredientBtn btn btn-outline-danger"
                                                 title="Letzten Inhaltsstoff löschen"

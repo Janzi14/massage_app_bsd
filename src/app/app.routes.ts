@@ -14,4 +14,5 @@ export const routes = [
   },
   {path: 'oil', component: OilComponent},
   {path: 'oil/create-oil', component: CreateOilComponent},
+  {path: '', redirectTo: '/oil', pathMatch: 'full' as 'full'}
 ];

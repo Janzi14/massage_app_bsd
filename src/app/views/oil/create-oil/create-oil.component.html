@@ -101,11 +101,10 @@
                         <th>Inhaltsstoffe:</th>
                         <td>
                             <div>
-                                <input type="text" class="form-control" formControlName="newIngredient"
-                                       [(ngModel)]="oilService.newIngredient">
+                                <input type="text" class="form-control" formControlName="newIngredient">
                                 <button type="button" class="ingredientBtn btn btn-outline-success"
                                         title="Inhaltsstoff hinzufügen"
-                                        (click)="addIngredient();">+
+                                        (click)="this.oilService.newIngredient = addForm.get('newIngredient')?.value; addIngredient();">+
                                 </button>
                                 <button type="button" class="ingredientBtn btn btn-outline-danger"
                                         title="Letzten Inhaltsstoff löschen"
