@@ -8,10 +8,12 @@ import {
     validateBottleSize,
     validateDescription, validateIngredientList,
     validateName,
-    validateNewIngredient,
+    validateNewIngredient, validateOrigin,
     validatePrice
 } from "../../../validators/oil-validator";
 import {Router, RouterLink} from "@angular/router";
+import {Country} from "../../../types/country";
+import {CountryService} from "../../../endpoints/country.endpoints";
 
 @Component({
     selector: 'app-create-oil',
@@ -30,30 +32,40 @@ export class CreateOilComponent {
     isAddingModeActive: boolean = false;
     oilService: OilService;
 
-    templatePictures: string[] = [];
+    templatePictures: string[] = Constants.TEMPLATE_PICTURES;
     chosenPictures: string[] = [];
     pictureIsChosen: boolean[] = [];
 
-    addForm: FormGroup;
+    addForm: FormGroup = {} as FormGroup;
 
-    constructor(oilService: OilService, private formBuilder: FormBuilder, private router: Router) {
+
+    countries: Country[] = [];
+    countryService: CountryService;
+
+    constructor(oilService: OilService, countryService: CountryService, private formBuilder: FormBuilder, private router: Router) {
         this.oilService = oilService;
-        this.addForm = this.formBuilder.group({
-            name: new FormControl('', [Validators.required, validateName]),
-            description: new FormControl('', [Validators.required, validateDescription]),
-            price: new FormControl(0, [Validators.required, validatePrice]),
-            bottle_size: new FormControl(0, [Validators.required, validateBottleSize]),
-            origin: new FormControl('', [Validators.required /*TODO: Autocomplete API*/]),
-            availability: false,
-            newIngredient: new FormControl('', [validateNewIngredient]),
-            ingredientList: new FormControl(this.oilService.ingredientList, [validateIngredientList])
-        });
+        this.countryService = countryService;
     }
 
     ngOnInit(): void {
+        this.countries = []
         this.setAddingModeActive(true);
+        this.getCountries();
         this.oilService.ingredientList = [];
-        this.templatePictures = this.oilService.getTemplatePictures();
+        this.createAddForm();
+    }
+
+    createAddForm(){
+      this.addForm = this.formBuilder.group({
+        name: new FormControl('', [Validators.required, validateName]),
+        description: new FormControl('', [Validators.required, validateDescription]),
+        price: new FormControl(0, [Validators.required, validatePrice]),
+        bottle_size: new FormControl(0, [Validators.required, validateBottleSize]),
+        origin: new FormControl('Österreich', [Validators.required, validateOrigin]),
+        availability: false,
+        newIngredient: new FormControl('', [validateNewIngredient]),
+        ingredientList: new FormControl(this.oilService.ingredientList, [validateIngredientList])
+      });
     }
 
     createOil(): void {
@@ -86,6 +98,12 @@ export class CreateOilComponent {
         this.isAddingModeActive = isAddingModeActive;
     }
 
+    getCountries(){
+        this.countryService.getCountries().subscribe(data => {
+            this.countries = data;
+        });
+    }
+
     addIngredient(): void {
         this.oilService.addIngredient();
         if(this.addForm.get('newIngredient')?.valid){
@@ -98,7 +116,8 @@ export class CreateOilComponent {
     }
 
     private createOilObject(): Oil {
-        let pictureBackup: string[] = [];
+        this.addForm.get('ingredientList')?.setValue(this.oilService.ingredientList);
+        let pictureBackup: string[];
 
         console.log(this.chosenPictures.length<1);
 
@@ -114,6 +133,8 @@ export class CreateOilComponent {
 
         delete this.addForm.value.newIngredient;
         delete this.addForm.value.ingredientList;
+
+        console.log(this.addForm.valid);
 
         if (this.addForm.valid) {
             const newId: string = uuidv4();
@@ -135,7 +156,7 @@ export class CreateOilComponent {
         }
     }
 
-    cancelAndNavigateBack(): void {
+    cancelAndNavigateBack(): void{
         this.setAddingModeActive(false);
         this.router.navigate(['oil']);
     }

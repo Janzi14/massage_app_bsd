@@ -73,7 +73,7 @@
                         <div class="carousel-inner">
                             <div *ngFor="let picture of activeOil?.pictures; let i = index"
                                  class="carousel-item" [ngClass]="{'active': i===0}">
-                                <img [src]="picture" class="d-block w-100">
+                                <img [src]="picture" class="d-block w-100" [alt]="picture">
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#oilCarousel"
@@ -207,8 +207,11 @@
                                 </tr>
                                 <tr>
                                     <th>Herkunftsland:</th>
-                                    <td><input type="text" class="form-control" formControlName="origin"
-                                               placeholder="{{activeOil?.origin}}"></td>
+                                    <td><select class="form-control" formControlName="origin">
+                                               <option *ngFor="let country of countries"
+                                                [value]="country.name"
+                                                [selected]="country.name === activeOil?.origin">{{country.name}}</option>
+                                    </select></td>
                                 </tr>
                                 <tr>
                                     <th>Artikel auf Lager?</th>

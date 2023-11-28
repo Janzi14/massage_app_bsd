@@ -13,6 +13,8 @@ import {
 import {RouterLink} from "@angular/router";
 import {CreateOilComponent} from "./create-oil/create-oil.component";
 import html2PDF from "jspdf-html2canvas";
+import {CountryService} from "../../endpoints/country.endpoints";
+import {Country} from "../../types/country";
 
 @Component({
     selector: 'app-oil',
@@ -38,13 +40,17 @@ export class OilComponent {
     searchTerm: string = '';
 
     editForm: FormGroup = {} as FormGroup;
+    countries: Country[] = [];
+    countryService: CountryService;
 
-    constructor(oilService: OilService, private formBuilder: FormBuilder) {
+    constructor(oilService: OilService, countryService: CountryService, private formBuilder: FormBuilder) {
         this.oilService = oilService;
+        this.countryService = countryService;
     }
 
     ngOnInit(): void {
         this.getOils();
+        this.getCountries();
         this.oilService.ingredientList = [];
         this.createEditForm();
     }
@@ -55,7 +61,7 @@ export class OilComponent {
             description: new FormControl(this.activeOil?.description, [Validators.required, validateDescription]),
             price: new FormControl(this.activeOil?.price, [Validators.required, validatePrice]),
             bottle_size: new FormControl(this.activeOil?.bottle_size, [Validators.required, validateBottleSize]),
-            origin: new FormControl(this.activeOil?.origin, [Validators.required /*TODO: Autocomplete API*/]),
+            origin: new FormControl(this.activeOil?.origin, [Validators.required]),
             availability: this.activeOil?.availability,
             newIngredient: new FormControl('', [validateNewIngredient]),
             ingredientList: new FormControl(this.oilService.ingredientList, [validateIngredientList])
@@ -67,6 +73,12 @@ export class OilComponent {
             console.log(Constants.CRUD_MESSAGE['readDataSuccess'], data);
             this.oils = data
             this.filteredOils = [...this.oils];
+        });
+    }
+
+    getCountries() {
+        this.countryService.getCountries().subscribe(data => {
+            this.countries = data;
         });
     }
 

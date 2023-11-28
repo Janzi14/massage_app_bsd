@@ -1,5 +1,6 @@
 import {AbstractControl} from '@angular/forms';
 import * as Constants from "../config/oil-constants";
+import {Country} from "../types/country";
 
 export function getErrorMsg(errorCode: string): string {
   return Constants.ERROR_MESSAGES[errorCode] || 'Unbekannter Fehler';
@@ -68,6 +69,16 @@ export function validateIngredientList(control: AbstractControl) {
 
   if (ingredients == null || ingredients.length < 1) {
     return {'ingredientListNullError': Constants.ERROR_MESSAGES['ingredientListNullError']};
+  }
+
+  return null;
+}
+
+export function validateOrigin(control: AbstractControl) {
+  const origin: Country = control.value;
+
+  if (origin == null) {
+    return {'originNullError': Constants.ERROR_MESSAGES['originNullError']};
   }
 
   return null;

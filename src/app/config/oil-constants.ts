@@ -16,25 +16,26 @@ export const ERROR_MESSAGES: { [key: string]: string } = {
     'bottleSizeNotPositiveError': 'Flaschenvolumen muss einen positiven Wert (>0) haben.',
     'bottleSizeVolumeError': 'Flaschenvolumen muss mindestens ' + BOTTLESIZE_MIN_SIZE + ' ml betragen.',
     'ingredientLengthError': 'Inhaltsstoff muss zwischen ' + INGREDIENT_MIN_LENGTH + ' und ' + INGREDIENT_MAX_LENGTH + ' Zeichen lang sein.',
-    'ingredientListNullError': 'Inhaltsstoff-Liste darf nicht leer sein.'
+    'ingredientListNullError': 'Inhaltsstoff-Liste darf nicht leer sein.',
+    'originNullError': 'Herkunftsland darf nicht leer sein.'
 };
 
-export const CRUD_MESSAGE: { [key: string]: string } = {
-    //Create
-    'createDataSuccess': 'Öl erfolgreich erstellt.',
-    'createDataError': 'Fehler beim Erstellen des Öls.',
+export const CRUD_MESSAGE: {[key: string]: string} = {
+  //Create
+  'createDataSuccess': 'Öl erfolgreich erstellt.',
+  'createDataError': 'Fehler beim Erstellen des Öls.',
 
-    //Read
-    'readDataSuccess': 'Lesen der Öle erfolgreich: ',
+  //Read
+  'readDataSuccess': 'Lesen der Öle erfolgreich: ',
 
-    //Update
-    'updateDataSuccess': 'Öl erfolgreich geupdatet.',
-    'updateDataError': 'Fehler beim Aktualisieren des Öls.',
+  //Update
+  'updateDataSuccess': 'Öl erfolgreich geupdatet.',
+  'updateDataError': 'Fehler beim Aktualisieren des Öls.',
 
-    //Delete
-    'deleteDataSuccess': 'Öl erfolgreich gelöscht.',
-    'deleteDataError': 'Fehler beim Löschen des Öls.',
-    'deleteConfirm': 'Möchten Sie \'[...]\' wirklich löschen?'
+  //Delete
+  'deleteDataSuccess': 'Öl erfolgreich gelöscht.',
+  'deleteDataError': 'Fehler beim Löschen des Öls.',
+  'deleteConfirm': 'Möchten Sie \'[...]\' wirklich löschen?'
 };
 
 export const TEMPLATE_PICTURES: string[] = [

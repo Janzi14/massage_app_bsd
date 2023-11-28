@@ -32,6 +32,12 @@
                          class="alert alert-danger">{{addForm.getError('bottleSizeVolumeError', 'bottle_size')}}</div>
                 </div>
 
+                <!--ORIGIN-->
+                <div *ngIf="addForm.get('origin')?.touched">
+                    <div *ngIf="addForm.get('origin')?.hasError('originNullError')"
+                         class="alert alert-danger">{{addForm.getError('originNullError', 'origin')}}</div>
+                </div>
+
                 <!--INGREDIENT-->
                 <div *ngIf="addForm.get('newIngredient')?.touched">
                     <div *ngIf="addForm.get('newIngredient')?.dirty && addForm.get('newIngredient')?.hasError('ingredientLengthError')"
@@ -88,8 +94,12 @@
                     </tr>
                     <tr>
                         <th>Herkunftsland:</th>
-                        <td><input type="text" class="form-control" formControlName="origin"
-                                   placeholder="Österreich"></td>
+                        <td>
+                            <select class="form-control" formControlName="origin">
+                                <option *ngFor="let country of countries"
+                                        [value]="country.name">{{country.name}}</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <th>Artikel auf Lager?</th>
