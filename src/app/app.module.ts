@@ -6,15 +6,16 @@ import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
 import {provideHttpClient} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     BrowserModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [provideRouter(routes), provideHttpClient()],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule { }

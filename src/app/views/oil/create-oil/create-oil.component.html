@@ -1,0 +1,159 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-6 col-sm-3">
+            <div *ngIf="addForm.invalid">
+                <!--NAME-->
+                <div *ngIf="addForm.get('name')?.touched">
+                    <div *ngIf="addForm.get('name')?.hasError('nameNullError')"
+                         class="alert alert-danger">{{addForm.getError('nameNullError', 'name')}}</div>
+                    <div *ngIf="addForm.get('name')?.hasError('nameLengthError')"
+                         class="alert alert-danger">{{addForm.getError('nameLengthError', 'name')}}</div>
+                </div>
+
+                <!--DESCRIPTION-->
+                <div *ngIf="addForm.get('description')?.touched">
+                    <div *ngIf="addForm.get('description')?.hasError('descriptionNullError')"
+                         class="alert alert-danger">{{addForm.getError('descriptionNullError', 'description')}}</div>
+                    <div *ngIf="addForm.get('description')?.hasError('descriptionLengthError')"
+                         class="alert alert-danger">{{addForm.getError('descriptionLengthError', 'description')}}</div>
+                </div>
+
+                <!--PRICE-->
+                <div *ngIf="addForm.get('price')?.touched">
+                    <div *ngIf="addForm.get('price')?.hasError('priceNotPositiveError')"
+                         class="alert alert-danger">{{addForm.getError('priceNotPositiveError', 'price')}}</div>
+                </div>
+
+                <!--BOTTLESIZE-->
+                <div *ngIf="addForm.get('bottle_size')?.touched">
+                    <div *ngIf="addForm.get('bottle_size')?.hasError('bottleSizeNotPositiveError')"
+                         class="alert alert-danger">{{addForm.getError('bottleSizeNotPositiveError', 'bottle_size')}}</div>
+                    <div *ngIf="addForm.get('bottle_size')?.hasError('bottleSizeVolumeError')"
+                         class="alert alert-danger">{{addForm.getError('bottleSizeVolumeError', 'bottle_size')}}</div>
+                </div>
+
+                <!--INGREDIENT-->
+                <div *ngIf="addForm.get('newIngredient')?.touched">
+                    <div *ngIf="addForm.get('newIngredient')?.dirty && addForm.get('newIngredient')?.hasError('ingredientLengthError')"
+                         class="alert alert-danger">{{addForm.getError('ingredientLengthError', 'newIngredient')}}</div>
+                </div>
+
+                <!--INGREDIENT-LIST-->
+                <div *ngIf="addForm.get('ingredientList')?.touched">
+                    <div *ngIf="oilService.ingredientList.length<1 && addForm.get('ingredientList')?.hasError('ingredientListNullError')"
+                         class="alert alert-danger">{{addForm.getError('ingredientListNullError', 'ingredientList')}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-sm-6" *ngIf="isAddingModeActive">
+            <h5>Neuen Öl-Eintrag erstellen</h5>
+            <hr>
+
+            <form class="form-group" [formGroup]="addForm" (ngSubmit)="createOil()">
+                <table class="table oilDetails">
+                    <tr>
+                        <th>Name:</th>
+                        <td><input type="text" class="form-control" formControlName="name"
+                                   placeholder="Name">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Beschreibung:</th>
+                        <td><textarea class="form-control" formControlName="description"
+                                      placeholder="Beschreibung" rows="4" cols="23"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Preis:</th>
+                        <td>
+                            <div class="input-group">
+                                <input type="number" class="form-control" formControlName="price"
+                                       placeholder="12.99" step=".01">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">€</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Nettovolumen:</th>
+                        <td>
+                            <div class="input-group">
+                                <input type="number" class="form-control" formControlName="bottle_size"
+                                       placeholder="150">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">ml</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Herkunftsland:</th>
+                        <td><input type="text" class="form-control" formControlName="origin"
+                                   placeholder="Österreich"></td>
+                    </tr>
+                    <tr>
+                        <th>Artikel auf Lager?</th>
+                        <td><input type="checkbox" class="form-check-input" formControlName="availability"
+                                   [checked]="true">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Inhaltsstoffe:</th>
+                        <td>
+                            <div>
+                                <input type="text" class="form-control" formControlName="newIngredient">
+                                <button type="button" class="ingredientBtn btn btn-outline-success"
+                                        title="Inhaltsstoff hinzufügen"
+                                        (click)="this.oilService.newIngredient = addForm.get('newIngredient')?.value; addIngredient();">
+                                    +
+                                </button>
+                                <button type="button" class="ingredientBtn btn btn-outline-danger"
+                                        title="Letzten Inhaltsstoff löschen"
+                                        (click)="deleteIngredient();">-
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td>
+                            <a id="ingredientListShow">{{oilService.ingredientList.join(', ')}}</a>
+                        </td>
+                    </tr>
+                </table>
+                <hr/>
+                <table class="buttonTable">
+                    <tr>
+                        <td>
+                            <button class="btn btn-success" type="submit"
+                                    title="Speichern"><i class="bi bi-floppy-fill"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary" type="reset" title="Formular leeren"
+                                    (click)="oilService.ingredientList = [];"><i
+                                    class="bi bi-eraser-fill"></i></button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" type="reset" title="Abbrechen"
+                                    (click)="cancelAndNavigateBack();"><i
+                                    class="bi bi-x-lg"></i></button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="col-6 col-sm-3">
+            <div class="row">
+                <h5>Vorlage-Bilder</h5>
+                <p><i>Klicken, um sie dem Öl zuzuweisen...</i></p>
+                <div *ngFor="let templatePicture of templatePictures; let i = index" class="col-md-6">
+                    <div class="templatePictureButton" (click)="togglePictureAdd(templatePicture, i)">
+                        <img [src]="templatePicture" class="templatePicture" [alt]="templatePicture">
+                        <span *ngIf="pictureIsChosen[i]" class="overlay"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
