@@ -1,10 +1,8 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {OilService} from "../../endpoints/oil.endpoints";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import * as Constants from "../../config/oil-constants";
-import * as jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 
 import {
     validateBottleSize,
@@ -162,10 +160,7 @@ export class OilComponent {
                     format: 'a4',
                 },
                 imageType: 'image/png',
-                output: fileName,
-                success: function (pdf) {
-                    pdf.save(fileName);
-                }
+                output: fileName
             });
 
             console.log('PDF wurde erstellt.');
