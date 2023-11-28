@@ -104,7 +104,8 @@
                                 <input type="text" class="form-control" formControlName="newIngredient">
                                 <button type="button" class="ingredientBtn btn btn-outline-success"
                                         title="Inhaltsstoff hinzufügen"
-                                        (click)="this.oilService.newIngredient = addForm.get('newIngredient')?.value; addIngredient();">+
+                                        (click)="this.oilService.newIngredient = addForm.get('newIngredient')?.value; addIngredient();">
+                                    +
                                 </button>
                                 <button type="button" class="ingredientBtn btn btn-outline-danger"
                                         title="Letzten Inhaltsstoff löschen"
@@ -141,6 +142,18 @@
                     </tr>
                 </table>
             </form>
+        </div>
+        <div class="col-6 col-sm-3">
+            <div class="row">
+                <h5>Vorlage-Bilder</h5>
+                <p><i>Klicken, um sie dem Öl zuzuweisen...</i></p>
+                <div *ngFor="let templatePicture of templatePictures; let i = index" class="col-md-6">
+                    <div class="templatePictureButton" (click)="togglePictureAdd(templatePicture, i)">
+                        <img [src]="templatePicture" class="templatePicture" [alt]="templatePicture">
+                        <span *ngIf="pictureIsChosen[i]" class="overlay"></span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

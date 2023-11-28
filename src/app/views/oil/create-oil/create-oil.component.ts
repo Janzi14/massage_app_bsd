@@ -30,6 +30,10 @@ export class CreateOilComponent {
     isAddingModeActive: boolean = false;
     oilService: OilService;
 
+    templatePictures: string[] = [];
+    chosenPictures: string[] = [];
+    pictureIsChosen: boolean[] = [];
+
     addForm: FormGroup;
 
     constructor(oilService: OilService, private formBuilder: FormBuilder, private router: Router) {
@@ -49,27 +53,30 @@ export class CreateOilComponent {
     ngOnInit(): void {
         this.setAddingModeActive(true);
         this.oilService.ingredientList = [];
+        this.templatePictures = this.oilService.getTemplatePictures();
     }
 
     createOil(): void {
-        console.log(this.addForm.value.ingredientList);
+        if (this.addForm != undefined) {
+            this.addForm.get('ingredientList')?.setValue(this.oilService.ingredientList);
 
-        if (this.addForm != undefined && this.addForm.valid) {
-            const newOil = this.createOilObject();
+            if (this.addForm.valid) {
+                const newOil = this.createOilObject();
 
-            if (newOil != undefined || newOil != null) {
-                this.oilService.createOil(newOil).subscribe({
-                    next: () => {
-                        this.setAddingModeActive(false);
-                        this.router.navigate(['oil']);
+                if (newOil != undefined || newOil != null) {
+                    this.oilService.createOil(newOil).subscribe({
+                        next: () => {
+                            this.setAddingModeActive(false);
+                            this.router.navigate(['oil']);
 
-                        console.log(Constants.CRUD_MESSAGE['createDataSuccess']);
-                    },
-                    error: error => {
-                        console.log(Constants.CRUD_MESSAGE['createDataError'], error);
-                    }
-                });
-                return;
+                            console.log(Constants.CRUD_MESSAGE['createDataSuccess']);
+                        },
+                        error: error => {
+                            console.log(Constants.CRUD_MESSAGE['createDataError'], error);
+                        }
+                    });
+                    return;
+                }
             }
         }
         console.log(Constants.CRUD_MESSAGE['createDataError']);
@@ -81,6 +88,9 @@ export class CreateOilComponent {
 
     addIngredient(): void {
         this.oilService.addIngredient();
+        if(this.addForm.get('newIngredient')?.valid){
+            this.addForm.get('newIngredient')?.setValue("");
+        }
     }
 
     deleteIngredient(): void {
@@ -88,9 +98,17 @@ export class CreateOilComponent {
     }
 
     private createOilObject(): Oil {
-        console.log(this.oilService.ingredientList);
+        let pictureBackup: string[] = [];
 
-        this.addForm.get('ingredientList')?.setValue(this.oilService.ingredientList);
+        console.log(this.chosenPictures.length<1);
+
+
+        if (this.chosenPictures.length < 1) {
+            pictureBackup = Constants.NO_PICTURE;
+        } else {
+            pictureBackup = this.chosenPictures;
+        }
+        console.log(pictureBackup);
 
         const ingredientListBackup = this.addForm.value.ingredientList;
 
@@ -109,7 +127,7 @@ export class CreateOilComponent {
                 price: parseFloat(this.addForm.value.price),
                 availability: this.addForm.value.availability,
                 origin: this.addForm.value.origin,
-                pictures: ["picture1.jpg", "picture2.jpg" /*TODO File Input/Upload*/]
+                pictures: pictureBackup
             }
         } else {
             this.addForm.markAllAsTouched(); //trigger validator
@@ -117,8 +135,22 @@ export class CreateOilComponent {
         }
     }
 
-    cancelAndNavigateBack(): void{
+    cancelAndNavigateBack(): void {
         this.setAddingModeActive(false);
         this.router.navigate(['oil']);
+    }
+
+    togglePictureAdd(templatePicture: string, index: number) {
+        if (this.chosenPictures.includes(templatePicture)) {
+            this.pictureIsChosen[index] = false;
+            this.chosenPictures.forEach((element, i) => {
+                if (element == templatePicture) {
+                    this.chosenPictures.splice(i, 1);
+                }
+            });
+        } else {
+            this.pictureIsChosen[index] = true;
+            this.chosenPictures.push(templatePicture);
+        }
     }
 }

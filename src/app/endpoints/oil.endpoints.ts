@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {AbstractControl} from "@angular/forms";
 import {isNewIngredientAllowed} from "../validators/oil-validator";
+import {TEMPLATE_PICTURES} from "../config/oil-constants";
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,10 @@ export class OilService {
   //READ
   getOils(): Observable<Oil[]> {
     return this.http.get<Oil[]>(this.dataUrl);
+  }
+
+  getTemplatePictures(): string[]{
+    return TEMPLATE_PICTURES;
   }
 
   //UPDATE

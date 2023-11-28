@@ -126,6 +126,9 @@ export class OilComponent {
 
     addIngredient(): void {
         this.oilService.addIngredient();
+        if(this.editForm.get('newIngredient')?.valid){
+            this.editForm.get('newIngredient')?.setValue("");
+        }
     }
 
     deleteIngredient(): void {

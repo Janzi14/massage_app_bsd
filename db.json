@@ -38,45 +38,114 @@
       "id": "ca5e44cb-1c80-4610-bb3f-d7bc2be5baa1",
       "name": "Lavendelöl",
       "description": "Dieses Massageöl bietet eine entspannende Erfahrung mit dem beruhigenden Duft von Lavendel. Ideal für Stressabbau und Entspannung.",
-      "ingredients": ["Mandelöl", "Lavendelöl", "Vitamin E"],
+      "ingredients": [
+        "Mandelöl",
+        "Lavendelöl",
+        "Vitamin E"
+      ],
       "bottle_size": 150,
       "price": 12.99,
       "availability": true,
       "origin": "Deutschland",
-      "pictures": ["./assets/oil/lavender1.png", "./assets/oil/lavender2.png"]
+      "pictures": [
+        "./assets/oil/lavender1.png",
+        "./assets/oil/lavender2.png"
+      ]
     },
     {
       "id": "2680f9d9-de5d-4f1e-a051-f54492188c9b",
       "name": "Eukalyptusöl",
       "description": "Ein belebendes Massageöl mit dem erfrischenden Duft von Eukalyptus. Perfekt, um neue Energie zu tanken und die Sinne zu beleben.",
-      "ingredients": ["Jojobaöl", "Eukalyptusöl", "Minzöl", "Vitamin C"],
+      "ingredients": [
+        "Jojobaöl",
+        "Eukalyptusöl",
+        "Minzöl",
+        "Vitamin C"
+      ],
       "bottle_size": 130,
       "price": 17.99,
       "availability": true,
       "origin": "Australien",
-      "pictures": ["./assets/oil/eucalyptus1.png", "./assets/oil/eucalyptus2.png"]
+      "pictures": [
+        "./assets/oil/eucalyptus1.png",
+        "./assets/oil/eucalyptus2.png"
+      ]
     },
     {
       "id": "d6f45c6d-2746-4640-b311-c7e192ff03c4",
       "name": "Kokosnussöl",
       "description": "Dieses Massageöl vereint die Exotik der Tropen mit einem verführerischen Hauch von Kokosnuss. Feuchtigkeitsspendend und revitalisierend.",
-      "ingredients": ["Kokosöl", "Arganöl", "Vitamin A", "Vitamin E"],
+      "ingredients": [
+        "Kokosöl",
+        "Arganöl",
+        "Vitamin A",
+        "Vitamin E"
+      ],
       "bottle_size": 250,
       "price": 15.99,
       "availability": false,
       "origin": "Panama",
-      "pictures": ["./assets/oil/coconut1.png", "./assets/oil/coconut2.png", "./assets/oil/coconut3.png"]
+      "pictures": [
+        "./assets/oil/coconut1.png",
+        "./assets/oil/coconut2.png",
+        "./assets/oil/coconut3.png"
+      ]
     },
     {
       "id": "0504c99f-5566-46ac-b6e2-913beb782933",
       "name": "Zitrusfrisches Orangenöl",
       "description": "Erfrischendes Massageöl mit dem belebenden Duft von Orangen. Ideal, um neue Energie zu tanken und die Haut zu revitalisieren.",
-      "ingredients": ["Traubenkernöl", "Orangenöl", "Zitronenöl", "Vitamin C"],
+      "ingredients": [
+        "Traubenkernöl",
+        "Orangenöl",
+        "Zitronenöl",
+        "Vitamin C"
+      ],
       "bottle_size": 160,
       "price": 13.99,
       "availability": true,
       "origin": "Kuba",
-      "pictures": ["./assets/oil/citrusorange1.png", "./assets/oil/citrusorange2.png", "./assets/oil/citrusorange3.png"]
+      "pictures": [
+        "./assets/oil/citrusorange1.png",
+        "./assets/oil/citrusorange2.png",
+        "./assets/oil/citrusorange3.png"
+      ]
+    },
+    {
+      "id": "16c9034e-3669-46a4-8807-9b8595038cc2",
+      "name": "Gibtsnichtöl",
+      "description": "Gibts ja gar nicht",
+      "ingredients": [
+        "Nichts",
+        "Gar nix"
+      ],
+      "bottle_size": 150,
+      "price": 4.99,
+      "availability": true,
+      "origin": "Deutschland",
+      "pictures": [
+        "./assets/oil/templatePictures/template0.png"
+      ]
+    },
+    {
+      "id": "7b73da0d-c1b4-4553-a3c1-131f1e4dc0fc",
+      "name": "Testöl",
+      "description": "Dieses Öl dient zu Testzwecken. An BSD Studenten getestet.",
+      "ingredients": [
+        "BSD Studenten"
+      ],
+      "bottle_size": 50,
+      "price": 15,
+      "availability": true,
+      "origin": "Österreich",
+      "pictures": [
+        "./assets/oil/templatePictures/template1.png",
+        "./assets/oil/templatePictures/template2.png",
+        "./assets/oil/templatePictures/template3.png",
+        "./assets/oil/templatePictures/template4.png",
+        "./assets/oil/templatePictures/template5.png",
+        "./assets/oil/templatePictures/template6.png"
+      ]
     }
   ]
 }
