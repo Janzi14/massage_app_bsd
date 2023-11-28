@@ -1,27 +1,55 @@
 # MassageApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.9.
+---
 
-## Development server
+This project is an Angular application for managing massage appointments, treatments, oils, and team members. The backend is powered by a JSON server with a `db.json` file.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Prerequisites
+Make sure you have the following software installed on your machine:
 
-## Code scaffolding
+- [Node.js](https://nodejs.org/en/)
+- [Angular CLI](https://github.com/angular/angular-cli)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Installation
+
+1. Clone the repository to your local machine and navigate to the project directory.
+
+2. Install the project dependencies:
+
+    ```bash
+    npm install
+    ```
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+To build the project, run the following command:
 
-## Running unit tests
+```bash
+ng build
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The build artifacts will be stored in the `dist/` directory. Deploy the contents of this directory to a web server for production use.
 
-## Running end-to-end tests
+## JSON Server
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+The backend of this project is powered by JSON Server. To start the JSON Server, use the following command:
 
-## Further help
+```bash
+json-server --watch db.json
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Make sure you have [JSON Server](https://github.com/typicode/json-server) installed globally:
+
+```bash
+npm install -g json-server
+```
+
+## Development server
+
+Run the following command to start the development server:
+
+```bash
+ng serve
+```
+
+Navigate to `http://localhost:4200/` in your web browser. The application will automatically reload if you make any changes to the source files.
