@@ -36,32 +36,32 @@
   "team": [{
     "id": "team1",
     "name": "Jakob Janz",
-    "proffesion": "Diplom-Heilmasseur",
+    "profession": "Diplom-Heilmasseur",
     "motto": "Finding and releasing tension in your body.",
-    "age": 21
+    "age": 2023
   },
     {
       "id": "team2",
       "name": "Lukas Grafoner",
-      "proffesion": "Diplom-Heilmasseur",
+      "profession": "Diplom-Heilmasseur",
       "motto": "Finding and releasing tension in your body.",
-      "age": 22
+      "age": 2020
 
     },
     {
       "id": "team3",
       "name": "Julia Grabner-Haider",
-      "proffesion": "Beratung und Verkauf",
+      "profession": "Beratung und Verkauf",
       "motto": "Finding and releasing tension in your body.",
-      "age": 23
+      "age": 2015
 
     },
     {
       "id": "team4",
       "name": "Viktoria Feichtinger",
-      "proffesion": "Beratung und Verkauf",
+      "profession": "Beratung und Verkauf",
       "motto": "Finding and releasing tension in your body.",
-      "age": 23
+      "age": 2017
 
     }
   ]

@@ -1,3 +1,27 @@
 <ul>
-  <li *ngFor="let member of teammembers">{{member.name}}</li>
+  <div class="container">
+  <div class="tile-container">
+<br>
+    <br>
+    <div *ngFor="let members of teammembers" class="tile">
+
+        <img src="/assets/Bessel2.jpeg" >
+      <h3>{{ members.name }}</h3>
+      <h4>{{members.profession}}</h4>
+      <h5>Motto: {{members.motto}}</h5>
+      <h6>beim Team seit: {{members.age}}</h6>
+      <!-- Weitere Informationen oder Inhalte für jede Kachel -->
+
+     <button>Bearbeiten</button>
+      <button>Löschen</button>
+    <br>
+
+
+    </div>
+
+    <button>+</button>
+  </div>
+
+  </div>
+
 </ul>

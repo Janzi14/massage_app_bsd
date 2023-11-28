@@ -1,0 +1,102 @@
+/* app.component.css */
+.tile-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Abstand zwischen den Kacheln */
+
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+h3{
+  font-weight: bold;
+}
+h5{
+  font-family: Helvetica;
+  font-weight: inherit;
+}
+h4{
+  font-weight: lighter;
+}
+
+.tile {
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 400px; /* Breite jeder Kachel */
+  box-sizing: border-box;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+.tile-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Abstand zwischen den Kacheln */
+}
+
+.tile {
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 400px; /* Breite jeder Kachel */
+  box-sizing: border-box;
+  text-align: center;
+}
+
+img {
+  max-width: 100%; /* Bildgröße anpassen, um Überlauf zu vermeiden */
+}
+.tile {
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 400px;
+  box-sizing: border-box;
+  text-align: center;
+}
+.tile-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tile {
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 400px;
+  box-sizing: border-box;
+  text-align: center;
+}
+/* app.component.css */
+.tile {
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 400px;
+  box-sizing: border-box;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.tile:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+.tile {
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 400px;
+  box-sizing: border-box;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+img {
+  max-width: 100%;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.tile:hover img {
+  transform: scale(1.1);
+}

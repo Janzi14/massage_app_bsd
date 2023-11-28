@@ -8,6 +8,7 @@ import { routes } from './app.routes';
 import { TeamComponent } from './views/team/team.component';
 import {provideHttpClient} from "@angular/common/http";
 
+
 @NgModule({
   imports: [
     BrowserModule,
