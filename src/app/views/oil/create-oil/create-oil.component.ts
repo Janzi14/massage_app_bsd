@@ -119,22 +119,16 @@ export class CreateOilComponent {
         this.addForm.get('ingredientList')?.setValue(this.oilService.ingredientList);
         let pictureBackup: string[];
 
-        console.log(this.chosenPictures.length<1);
-
-
         if (this.chosenPictures.length < 1) {
             pictureBackup = Constants.NO_PICTURE;
         } else {
             pictureBackup = this.chosenPictures;
         }
-        console.log(pictureBackup);
 
         const ingredientListBackup = this.addForm.value.ingredientList;
 
         delete this.addForm.value.newIngredient;
         delete this.addForm.value.ingredientList;
-
-        console.log(this.addForm.valid);
 
         if (this.addForm.valid) {
             const newId: string = uuidv4();

@@ -20,16 +20,6 @@ Make sure you have the following software installed on your machine:
     npm install
     ```
 
-## Build
-
-To build the project, run the following command:
-
-```bash
-ng build
-```
-
-The build artifacts will be stored in the `dist/` directory. Deploy the contents of this directory to a web server for production use.
-
 ## JSON Server
 
 The backend of this project is powered by JSON Server. To start the JSON Server, use the following command:
@@ -53,3 +43,14 @@ ng serve
 ```
 
 Navigate to `http://localhost:4200/` in your web browser. The application will automatically reload if you make any changes to the source files.
+
+
+## Build
+
+To build the project, run the following command:
+
+```bash
+ng build
+```
+
+The build artifacts will be stored in the `dist/` directory. Deploy the contents of this directory to a web server for production use.
