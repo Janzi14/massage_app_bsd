@@ -1,14 +1,28 @@
 /* app.component.css */
+
+.top-space {
+  height: 50px;
+}
+
+.bottom-space {
+  height: 50px;
+}
 .tile-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* Abstand zwischen den Kacheln */
+  margin-left: auto;
+  margin-right: auto;
+  gap: 10px;
+  border-radius: 50px
 
 }
 .container {
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 50px
 
 }
 h3{
@@ -25,27 +39,37 @@ h4{
 .tile {
   border: 1px solid #ccc;
   padding: 10px;
-  width: 400px; /* Breite jeder Kachel */
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
   box-sizing: border-box;
   text-align: center;
   font-family: 'Arial', sans-serif;
+  border-radius: 50px
 }
 .tile-container {
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* Abstand zwischen den Kacheln */
+  gap: 10px;
+  border-radius: 50px
 }
 
 .tile {
+  margin-left: auto;
+  margin-right: auto;
   border: 1px solid #ccc;
   padding: 10px;
-  width: 400px; /* Breite jeder Kachel */
+  width: 400px;
   box-sizing: border-box;
   text-align: center;
+  border-radius: 50px
 }
 
 img {
-  max-width: 100%; /* Bildgröße anpassen, um Überlauf zu vermeiden */
+  max-width: 100%;
+  border-radius: 50px
 }
 .tile {
   background-color: #f4f4f4;
@@ -54,11 +78,15 @@ img {
   width: 400px;
   box-sizing: border-box;
   text-align: center;
+  border-radius: 50px
 }
 .tile-container {
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  border-radius: 50px
 }
 
 .tile {
@@ -67,6 +95,7 @@ img {
   width: 400px;
   box-sizing: border-box;
   text-align: center;
+  border-radius: 50px
 }
 /* app.component.css */
 .tile {
@@ -77,6 +106,7 @@ img {
   text-align: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
+  border-radius: 50px
 }
 
 .tile:hover {
@@ -92,11 +122,26 @@ img {
 }
 img {
   max-width: 100%;
-  border-radius: 5px;
+
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  border-radius: 50px
 }
 
 .tile:hover img {
   transform: scale(1.1);
 }
+button {
+  padding: 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+button:hover {
+  background-color: black;
+}
+
+

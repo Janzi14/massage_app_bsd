@@ -6,6 +6,7 @@ import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
 import {provideHttpClient} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
+import { TeamSearchComponent } from './views/team/team-search/team-search.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import {ReactiveFormsModule} from "@angular/forms";
   ],
   providers: [provideRouter(routes), provideHttpClient()],
   bootstrap: [AppComponent],
+  declarations: [
+
+  ],
 })
 export class AppModule {
 }
