@@ -1,0 +1,44 @@
+.oilDetails {
+    width: 100%;
+}
+
+.buttonTable {
+    width: 100%;
+}
+
+.buttonTable button.btn {
+    width: 100%;
+}
+
+.ingredientBtn {
+    width: 50%;
+}
+
+#ingredientListShow {
+    list-style: none;
+    font-style: italic;
+}
+
+.templatePicture, .templatePictureButton {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    border: 1px solid black;
+}
+
+.overlay {
+    position: absolute;
+    z-index:1;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 150px;
+    background-color: rgba(0, 127, 0, 0.35);
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+td, th {
+    vertical-align: center;
+}

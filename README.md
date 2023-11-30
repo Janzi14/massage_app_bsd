@@ -1,27 +1,56 @@
 # MassageApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.9.
+---
+
+This project is an Angular application for managing massage appointments, treatments, oils, and team members. The backend is powered by a JSON server with a `db.json` file.
+
+## Prerequisites
+Make sure you have the following software installed on your machine:
+
+- [Node.js](https://nodejs.org/en/)
+- [Angular CLI](https://github.com/angular/angular-cli)
+
+## Installation
+
+1. Clone the repository to your local machine and navigate to the project directory.
+
+2. Install the project dependencies:
+
+    ```bash
+    npm install
+    ```
+
+## JSON Server
+
+The backend of this project is powered by JSON Server. To start the JSON Server, use the following command:
+
+```bash
+json-server --watch db.json
+```
+
+Make sure you have [JSON Server](https://github.com/typicode/json-server) installed globally:
+
+```bash
+npm install -g json-server
+```
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run the following command to start the development server:
 
-## Code scaffolding
+```bash
+ng serve
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Navigate to `http://localhost:4200/` in your web browser. The application will automatically reload if you make any changes to the source files.
+
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+To build the project, run the following command:
 
-## Running unit tests
+```bash
+ng build
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+The build artifacts will be stored in the `dist/` directory. Deploy the contents of this directory to a web server for production use.

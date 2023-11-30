@@ -6,19 +6,16 @@ import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
 import {provideHttpClient} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
-import { TeamSearchComponent } from './views/team/team-search/team-search.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     BrowserModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [provideRouter(routes), provideHttpClient()],
   bootstrap: [AppComponent],
-  declarations: [
-
-  ],
 })
-export class AppModule {
-}
+export class AppModule { }
