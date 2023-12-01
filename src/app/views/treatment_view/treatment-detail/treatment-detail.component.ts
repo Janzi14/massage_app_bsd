@@ -42,6 +42,15 @@ export class TreatmentDetailComponent implements OnInit {
     }
   }
 
+  readSpecialFeatureDescriptionOutLoud() {
+    const content = "Ich bin Jakobs special Feature. Um mich zu testen, klicke auf den Button auf dem 'Details vorlesen lassen' steht und höre gut zu";
+    const utterance = new SpeechSynthesisUtterance();
+    utterance.text = content;
+    utterance.lang = 'de-DE';
+    window.speechSynthesis.speak(utterance);
+
+  }
+
   ngOnInit() {
     const routeParams = this.route.snapshot.paramMap;
     const idFromRoute = routeParams.get('id');
