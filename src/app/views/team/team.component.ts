@@ -4,7 +4,8 @@ import { NgForOf} from "@angular/common";
 import { TeamMember } from './team';
 import {TeamService} from "../../endpoints/team.endpoints";
 import { TeamSearchComponent } from '../team/team-search/team-search.component';
-import {TreatmentSearchComponent} from "../treatment_view/components/treatment-search/treatment-search.component"; // Passe den Pfad entsprechend an
+
+
 
 
 @Component({
@@ -21,13 +22,15 @@ import {TreatmentSearchComponent} from "../treatment_view/components/treatment-s
 
 
 export class TeamComponent {
-  teammembers?: TeamMember[]= [];
-
+  teammembers?: TeamMember[] = [];
 
 
   constructor(private http: HttpClient) {
   }
 
+  /*constructor(private teamService: TeamService) {
+    this.teammembers = this.teamService.getTeam();
+  }*/
 
 
   ngOnInit(): void {
@@ -35,9 +38,25 @@ export class TeamComponent {
         console.log(data);
         this.teammembers = data;
       }
-
     );
 
   }
+
+ /* addTeamMember(): void {
+    const newMember: TeamMember = {
+      id: this.teammembers.length +1
+      name: `Member ${this.teammembers.length + 1}`,
+      motto: 'New Motto',
+      profession: 'New Profession',
+      year: new Date().getFullYear(),
+    };
+
+    this.teamService.addTeamMember(newMember);
+
+  }*/
+
+ /* deleteTeamMember(member: TeamMember): void {
+    this.teamService.deleteTeamMember(member);
+  }*/
 
 }
