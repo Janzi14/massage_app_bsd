@@ -19,7 +19,7 @@
 
 
      <button>Bearbeiten</button>
-      <button>Löschen </button>
+      <button> <!--(click)="deleteTeamMember(member)-->Löschen</button>
     <br>
 
 
@@ -35,11 +35,21 @@
 <div class = "container">
   <div class="tile-container">
 
-  <button>
-    Hinzufügen
-  </button>
 
-</div>
+    <!--
+       <div *ngFor="let member of teammembers" class="team-member-card">
+         <img [src]="'assets/' + member.id + '.jpg'" alt="{{ member.name }}" />
+         <h3>{{ member.name }}</h3>
+         <p>{{ member.motto }}</p>
+         <p>{{ member.profession }}</p>
+         <p>{{ member.age }}</p>
+       </div>
+   -->
+       <button>Hinzufügen </button>
+      <!-- <button (click)="addTeamMember()">Neues Mitglied hinzufügen</button>-->
+
+
+  </div>
   <div class="bottom-space"></div>
 </div>
 
