@@ -1,12 +1,13 @@
-<div class="d-flex flex-column gap-4 mx-auto details-view">
+<div class="d-flex flex-column gap-4 mx-auto details-view" tabindex="0"
+     (keydown.escape)="readSpecialFeatureDescriptionOutLoud()">
   <div class="text-center mt-5" id="details-view">
     <h1 class="card-header text-success pb-2">
       {{treatment?.name}}
     </h1>
     <ul class="list-group list-group-flush h3">
-      <li class="list-group-item text-secondary">{{treatment?.description}}</li>
+      <li class="list-group-item text-secondary">{{treatment?.description}} </li>
       <li class="list-group-item text-secondary">{{treatment?.price_in_euro}}€/Stunde</li>
-      <li class="list-group-item text-secondary">{{treatment?.body_part}}</li>
+      <li class="list-group-item text-secondary"> {{treatment?.body_part}} </li>
       <li [class]="treatment?.available?'bg-success': 'bg-danger'"
           class="list-group-item text-white">{{treatment?.available ? "Verfügbar" : "Nicht verfügbar"}}
       </li>
